@@ -1,0 +1,19 @@
+[meta title:"Pathfinding in Networks" description:"Explanation Website" /]
+
+[Header
+  title:"Pathfinding in Networks"
+  subtitle:"Introduction to two algorithms and much more on the way!"
+  author:"Fake Names ..." /]
+
+Das hier ist die dummy idyll datei, die alles erstmal kombinieren soll.
+Also welche Variablen brauchen eure Klassen um mit den anderen Teilen der Website zu interagieren.
+
+// which row and column to highlight in the matrix
+[var name:"highlightRow"/]
+[var name:"highlightCol"/]
+
+Hier liegen die einzelnen Komponenten:
+[Network /]
+//damit kann ich in meinem d3 hRow und hCol benutzen
+[Matrix hRow:highlightRow hCol:highlightCol/]
+[Pseudocode /]
