@@ -6,18 +6,18 @@
 			stroke:#fff;
 			stroke-width: 2px;
 		}
-
+		
 		.link{
 			stroke:#777;
 			stroke-width: 2px;
 			troke-opacity: 0.6;
 		}
-
+		
 		marker#arrow {
 		      stroke: #999;
 		      fill: #999;
 	      }
-
+		
 	</style>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -29,25 +29,25 @@
 		<svg id="cloud" width="1" height="6">
             <defs>
                 <marker id="arrow" viewbox="0 -5 10 10" refX="18" refY="0"
-                        markerWidth="20" markerHeight="20" orient="auto">
+                        markerWidth="20" markerHeight="100" orient="auto">
                     <path d="M0,-5L10,0L0,5Z">
                 </marker>
            </defs>
         </svg>
      </body>
-
+        
 		<h1>Object Oriented JavaScript</h1>
-		<link href="cloud.css" rel="stylesheet" type="text/css" />
-		<script src="cloud.js" type="text/javascript"></script>
+
 		<script src="d3.v3.js" type="text/javaScript"></script>
         <script src="KthMatrix.js"></script>
         <script src="Steps.js"></script>
         <script src="FloydWarshall.js"></script>
         <script src="FitData.js"></script>
+        <script src="NetWork.js"></script>
         <script src="Main.js"></script>
-
+        
         <script>
-
+        
         //--------------------------------Test--------------------------------
 			var weights = [
 			  	[0, 1, 3],
@@ -61,131 +61,36 @@
 				[4, 3, 6]
 			];
 			var numVertices = 5;
-
+			
 			var fitData = new FitData(weights);
 			var links = fitData.getlinkData();
 			var nodes = fitData.getNodesData();
-
+			
 			var fw = new FloydWarshall(weights, numVertices);
 			var allSteps = new Steps(fw);
-
+			
 			// liefert alle kth Matricen zurück
 			// um zu sehen wie ein Object der Klasse KthMatrix aufgebaut ist, Attribute anschaun
 			var allMatrices = fw.getAllMatrices();
-
+			
 			// liefert alle Schritte der Berechung
 			var steps = allSteps.getAllSteps();
-
+			
 			console.log('-----------ALL STEPS-----------')
 			allSteps.dispAllSteps();
 
         		var width = 1200,
         			height = 600;
-
-
-        		var svg = d3.select('body').append('svg')
-        			.attr('width', width)
-        			.attr('height', height);
-
-
-        		var force = d3.layout.force()
-        			.size([width, height])
-        			.nodes(d3.values(nodes))
-        			.links(links)
-        			.on("tick", tick)
-        			.linkDistance(300)
-        			.start();
-
-
-        		var link = svg.append('g').selectAll('link')
-        			.data(links)
-        			.enter().append('svg:line')
-        			.attr('class', 'link')
-        			.attr("id",function(d,i) {return 'edge'+i})
-        			.attr('marker-end','url(#arrow)');
-
-
-        		link.append("title")
-            		.text(function (d) {return d.type;});
-
-	      	var node = svg.selectAll('circle.node')
-	        			.data(force.nodes())
-	        			.enter().append('circle')
-	        			.attr('class', 'node')
-	        			.attr('r', width*0.025);
-
-	        var nodelabels = svg.selectAll(".nodelabel")
-			       .data(force.nodes())
-			       .enter()
-			       .append("text")
-			       .attr({"x":function(d){return d.x;},
-			              "y":function(d){return d.y;},
-			              "class":"nodelabel",
-			              'font-size':30,
-			              "stroke":"black"})
-			       .text(function(d){return d.name;});
-
-	        	var edgepaths = svg.selectAll(".edgepath")
-			        .data(links)
-			        .enter()
-			        .append('path')
-			        .attr({'d': function(d) {return 'M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y},
-			               'class':'edgepath',
-			               'fill-opacity':0,
-			               'stroke-opacity':0,
-			               'fill':'blue',
-			               'stroke':'red',
-			               'id':function(d,i) {return 'edgepath'+i}})
-			        .style("pointer-events", "none");
-
-		    var edgelabels = svg.selectAll(".edgelabel")
-		        .data(links)
-		        .enter()
-		        .append('text')
-		        .style("pointer-events", "none")
-		        .attr({'class':'edgelabel',
-		               'id':function(d,i){return 'edgelabel'+i},
-		               'dx':100,
-		               'dy':17,
-		               'font-size':20,
-		               'fill':'#aaa'});
-
-			    edgelabels.append('textPath')
-			        .attr('xlink:href',function(d,i) {return '#edgepath'+i})
-			        .style("pointer-events", "none")
-			        .text(function(d){return d.typ});
-
+        		
+        		
+        		var netWork  = new NetWork(links,nodes, width, height );
+        			
         		function tick(e){
-        			node.attr('cx', function(d){return d.x;})
-        				.attr('cy', function(d){return d.y;})
-        				.call(force.drag);
-
-        			nodelabels.attr("x", function(d) { return d.x-6.75; })
-                  	.attr("y", function(d) { return d.y+6; });
-
-        			link.attr('x1', function(d){ return d.source.x;})
-	        			.attr('y1', function(d){ return d.source.y;})
-	        			.attr('x2', function(d){ return d.target.x;})
-	        			.attr('y2', function(d){ return d.target.y;});
-
-	        		edgepaths.attr('d', function(d) { var path='M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y;
-                                           //console.log(d)
-                               return path});
-
-		        edgelabels.attr('transform',function(d,i){
-		            if (d.target.x<d.source.x){
-		                bbox = this.getBBox();
-		                rx = bbox.x+bbox.width/2;
-		                ry = bbox.y+bbox.height/2;
-		                return 'rotate(180 '+rx+' '+ry+')';
-		                }
-		            else {
-		                return 'rotate(0)';
-		                }
-		        });
+        			netWork.perform();
         		}
-
+        		
 
         		</script>
-
+	
 </html>
+

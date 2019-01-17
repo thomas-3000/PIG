@@ -1,4 +1,4 @@
-class Network{
+class NetWork{
 	constructor(links, nodes, width, height){
 		this.links = links;
 		this.nodes = nodes;
@@ -8,8 +8,10 @@ class Network{
 		this.svg = this.generateSVG();
 		this.force = this.generateForce();
 		this.link = this.generateLink();
-		this.nodeObgject = this.generateNodes();
-		
+		this.node = this.generateNodes();
+		this.nodelabels = this.generatNodeLabels();
+		this.edgePaths = this.generateEdgePath();
+		this.edgeLabels = this.generateEdgeLabels();
 	}
 	
 	generateSVG(){
@@ -24,7 +26,7 @@ class Network{
 		var force = d3.layout.force()
         			.size([this.width, this.height])
         			.nodes(d3.values(this.nodes))
-        			.links(links)
+        			.links(this.links)
         			.on("tick", tick)
         			.linkDistance(300)
         			.start();
@@ -32,7 +34,7 @@ class Network{
 	}
 	
 	generateLink(){
-		var link = svg.append('g').selectAll('link')
+		var link = this.svg.append('g').selectAll('link')
         			.data(this.links)
         			.enter().append('svg:line')
         			.attr('class', 'link')
@@ -45,17 +47,17 @@ class Network{
 	}
 	
 	generateNodes(){
-		var node = svg.selectAll('circle.node')
-	        			.data(force.nodes())
+		var node = this.svg.selectAll('circle.node')
+	        			.data(this.force.nodes())
 	        			.enter().append('circle')
 	        			.attr('class', 'node')
 	        			.attr('r', this.width*0.025);
 	     return node;
 	}
 	
-	generatNodeLabels{
-		 var nodelabels = svg.selectAll(".nodelabel") 
-			       .data(force.nodes())
+	generatNodeLabels(){
+		 var nodelabels = this.svg.selectAll(".nodelabel") 
+			       .data(this.force.nodes())
 			       .enter()
 			       .append("text")
 			       .attr({"x":function(d){return d.x;},
@@ -64,6 +66,73 @@ class Network{
 			              'font-size':30,
 			              "stroke":"black"})
 			       .text(function(d){return d.name;});
+		return nodelabels;
 		
 	}
+	
+	generateEdgePath(){
+		var edgepaths = this.svg.selectAll(".edgepath")
+			        .data(this.links)
+			        .enter()
+			        .append('path')
+			        .attr({'d': function(d) {return 'M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y},
+			               'class':'edgepath',
+			               'fill-opacity':0,
+			               'stroke-opacity':0,
+			               'fill':'blue',
+			               'stroke':'red',
+			               'id':function(d,i) {return 'edgepath'+i}})
+			        .style("pointer-events", "none");
+		return edgepaths;
+	}
+	
+	generateEdgeLabels(){
+	    var edgelabels = this.svg.selectAll(".edgelabel")
+		        .data(this.links)
+		        .enter()
+		        .append('text')
+		        .style("pointer-events", "none")
+		        .attr({'class':'edgelabel',
+		               'id':function(d,i){return 'edgelabel'+i},
+		               'dx':100,
+		               'dy':17,
+		               'font-size':20,
+		               'fill':'#aaa'});
+		
+			    edgelabels.append('textPath')
+			        .attr('xlink:href',function(d,i) {return '#edgepath'+i})
+			        .style("pointer-events", "none")
+			        .text(function(d){return d.typ});
+		return edgelabels;
+	}
+	
+	perform(){
+        			this.node.attr('cx', function(d){return d.x;})
+        				.attr('cy', function(d){return d.y;})
+        				.call(this.force.drag);
+        				
+        			this.nodelabels.attr("x", function(d) { return d.x-6.75; }) 
+                  	.attr("y", function(d) { return d.y+6; });
+        				
+        			this.link.attr('x1', function(d){ return d.source.x;})
+	        			.attr('y1', function(d){ return d.source.y;})
+	        			.attr('x2', function(d){ return d.target.x;})
+	        			.attr('y2', function(d){ return d.target.y;});
+	        		
+	        		this.edgePaths.attr('d', function(d) { var path='M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y;
+                                           //console.log(d)
+                               return path});       
+
+		        this.edgeLabels.attr('transform',function(d,i){
+		            if (d.target.x<d.source.x){
+		                var bbox = this.getBBox();
+		                var rx = bbox.x+bbox.width/2;
+		                var ry = bbox.y+bbox.height/2;
+		                return 'rotate(180 '+rx+' '+ry+')';
+		                }
+		            else {
+		                return 'rotate(0)';
+		                }
+		        });
+        		}
 }
