@@ -28,9 +28,9 @@ description:"my description" /]
 //[var name:"FW" value:0/]
 //[FloydWarshall ]
 
-## Title 
+## Title
 [fixed]
-[D3Matrix row_light:x col_light:y newMatrix:newMatrix row_comp:row_comp col_comp:col_comp show_lights:show_lights show_comp:show_comp show_marks:show_marks show_borders:show_borders ignite:ignite FloydWarshall:FloydWarshall/]
+[D3Matrix row_light:x col_light:y newMatrix:newMatrix row_comp:row_comp col_comp:col_comp show_lights:show_lights show_comp:show_comp show_marks:show_marks show_borders:show_borders ignite:ignite/]
 [/fixed]
 
 
