@@ -1,19 +1,56 @@
-[meta title:"Pathfinding in Networks" description:"Explanation Website" /]
 
+[meta
+  title:"Idyll testing 2222"
+description:"my description" /]
 [Header
-  title:"Pathfinding in Networks"
-  subtitle:"Introduction to two algorithms and much more on the way!"
-  author:"Fake Names ..." /]
+  title:"Data Visualization"
+  subtitle:"The playground 2"
+  author:"Ben"
+  /]
+//[div className:"fixed"]
+//[section className:"article-body"]
+[var name:"x" value: 0 /]
+[var name:"y" value: 0 /]
+[var name:"newMatrix" value: 0 /]
+[var name:"row_comp" value:0 /]
+[var name:"col_comp" value:0 /]
+[var name:"show_lights" value:0 /]
+[var name:"show_comp" value:0 /]
+[var name:"show_marks" value:1 /]
+[var name:"show_borders" value:1 /]
+[var name:"ignite" value:0 /]
+[var name:"step" value:0 /]
 
-Das hier ist die dummy idyll datei, die alles erstmal kombinieren soll.
-Also welche Variablen brauchen eure Klassen um mit den anderen Teilen der Website zu interagieren.
 
-// which row and column to highlight in the matrix
-[var name:"highlightRow"/]
-[var name:"highlightCol"/]
+//[fixed]
+//[D3Matrix className:"d3matrix" newRadius:newRadius /]
+//[/fixed]
+//[var name:"FW" value:0/]
+//[FloydWarshall ]
 
-Hier liegen die einzelnen Komponenten:
-[Network /]
-//damit kann ich in meinem d3 hRow und hCol benutzen
-[Matrix hRow:highlightRow hCol:highlightCol/]
-[Pseudocode /]
+## Title 
+[fixed]
+[D3Matrix row_light:x col_light:y newMatrix:newMatrix row_comp:row_comp col_comp:col_comp show_lights:show_lights show_comp:show_comp show_marks:show_marks show_borders:show_borders ignite:ignite FloydWarshall:FloydWarshall/]
+[/fixed]
+
+
+[button onClick: `if(ignite==0){ignite=1;}else{ignite=0}`]Ignite![/button]
+
+[button onClick:`if(show_lights==0){show_lights=1}else{show_lights=0}`]Lights on[/button]
+[button onClick:`show_comp=1`]Comparator[/button]
+x = [Display value:`x+1` format:"d" /]
+[button onClick:`x += 1`]x Up[/button]
+[button onClick:`x -= 1`]x Down[/button]
+y = [Display value:`y+1` format:"d" /]
+[button onClick:`y += 1`]y Up[/button]
+[button onClick:`y -= 1`]y Down[/button]
+row = [Display value:`row_comp+1` format:"d" /]
+[button onClick:`row_comp += 1`]row Up[/button]
+[button onClick:`row_comp -= 1`]row Down[/button]
+col = [Display value:`col_comp+1` format:"d" /]
+[button onClick:`col_comp += 1`]col Up[/button]
+[button onClick:`col_comp -= 1`]col Down[/button]
+[button onClick:`if(show_borders==1){show_borders=0;show_marks=1;}else{show_borders=1;show_marks=0;}`]toggle Borders[/button]
+[button onClick:`if(newMatrix==0){newMatrix=1} else{newMatrix=0} `] newMatrix [/button]
+
+[Display value:newMatrix /]
