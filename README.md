@@ -23,3 +23,7 @@ class D3Matrix extends D3Component {
 			var fw = new FloydWarshall(weights, numVertices);
 
 Dabei liegt die Datei FloydWarshall.js im gleichen Ordner wie meine aufrufende Datei. 
+
+
+
+Danke. Ich versuch das heute abend auch noch einzubauen. Bis morgen.
