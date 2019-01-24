@@ -34,4 +34,8 @@ class Steps{
 	getAllSteps(){
 		return this.allSteps;
 	}
+	
+	getIthStep(i){
+		return this.allSteps[i-1];
+	}
 }

@@ -61,8 +61,10 @@
 				[4, 3, 6]
 			];
 			var numVertices = 5;
+			var width = 1200,
+        			height = 600;
 			
-			var fitData = new FitData(weights);
+			var fitData = new FitData(weights, height, numVertices);
 			var links = fitData.getlinkData();
 			var nodes = fitData.getNodesData();
 			
@@ -79,10 +81,6 @@
 			console.log('-----------ALL STEPS-----------')
 			allSteps.dispAllSteps();
 
-        		var width = 1200,
-        			height = 600;
-        		
-        		
         		var netWork  = new NetWork(links,nodes, width, height );
         			
         		function tick(e){

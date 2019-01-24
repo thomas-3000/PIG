@@ -1,9 +1,11 @@
 class NetWork{
 	constructor(links, nodes, width, height){
+		this.radius = 10;
 		this.links = links;
 		this.nodes = nodes;
 		this.width = width;
 		this.height = height;
+		
 		
 		this.svg = this.generateSVG();
 		this.force = this.generateForce();
@@ -13,6 +15,7 @@ class NetWork{
 		this.edgePaths = this.generateEdgePath();
 		this.edgeLabels = this.generateEdgeLabels();
 	}
+	
 	
 	generateSVG(){
 		var svg =  d3.select('body').append('svg')
@@ -28,7 +31,7 @@ class NetWork{
         			.nodes(d3.values(this.nodes))
         			.links(this.links)
         			.on("tick", tick)
-        			.linkDistance(300)
+        			.linkDistance(400)
         			.start();
         return force;
 	}
@@ -51,7 +54,9 @@ class NetWork{
 	        			.data(this.force.nodes())
 	        			.enter().append('circle')
 	        			.attr('class', 'node')
-	        			.attr('r', this.width*0.025);
+	        			.attr('r', this.width*0.025)
+	        			.attr('cx', function(d) { console.log(d.x); return d.x; })
+	        			.attr('cy', function(d) { console.log(d.y); return d.y; });
 	     return node;
 	}
 	
@@ -109,7 +114,7 @@ class NetWork{
 	perform(){
         			this.node.attr('cx', function(d){return d.x;})
         				.attr('cy', function(d){return d.y;})
-        				.call(this.force.drag);
+        				//.call(this.force.drag);
         				
         			this.nodelabels.attr("x", function(d) { return d.x-6.75; }) 
                   	.attr("y", function(d) { return d.y+6; });

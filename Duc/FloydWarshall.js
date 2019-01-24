@@ -71,6 +71,16 @@ class FloydWarshall{
 		console.log('DONE transfer');
 	}//end transfer
 	
+	copyMatrix(oldMatrix){
+		var newMatrix = this.initMatrix(this.infinity);
+		for(var i = 0; i < this.numVertices; i++){
+			for(var j = 0; j < this.numVertices; j++){
+				newMatrix[i][j] = oldMatrix[i][j];
+			}
+		}
+		return newMatrix;
+	}
+	
 	displayMatrix(matrix){
 		console.log('Matrix');
 		var arrText = '';
@@ -98,7 +108,8 @@ class FloydWarshall{
 				}// end of j-loop
 			}// end of i-loop
 			console.log('--------------');
-			var kMatrix = new KthMatrix(k,this.distances);
+			var newDistances = this.copyMatrix(this.distances);
+			var kMatrix = new KthMatrix(k,newDistances);
 			this.allKMatrices.push(kMatrix);
 		} // end of k-loop
 	}// end of floydWarshallModified
@@ -154,3 +165,25 @@ class FloydWarshall{
 		return this.allKMatrices;
 	}
 }
+
+//--------------------------------Test--------------------------------
+var weights = [
+  	[0, 1, 3],
+ 	[0, 4, -4],
+ 	[0, 2, 8],
+ 	[1, 4, 7],
+	[1, 3, 1],
+	[2, 1, 4],
+	[3, 2, -5],
+	[3, 0, 2],
+	[4, 3, 6]
+];
+var numVertices = 5;
+
+var fw = new FloydWarshall(weights, numVertices);
+
+var allMatrices = fw.getAllMatrices();
+
+console.log('-----------ALL STEPS-----------')
+console.log(allMatrices)
+
