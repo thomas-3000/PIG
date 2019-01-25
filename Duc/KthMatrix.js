@@ -70,3 +70,5 @@ class KthMatrix{
 // ];
 // var oneMatrix = new KthMatrix(3,weights);
 // var edge = new Edge(1,2,15);
+
+module.exports = KthMatrix;

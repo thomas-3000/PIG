@@ -1,3 +1,6 @@
+const KthMatrix = require('./KthMatrix');
+
+
 class Path{
 	constructor(start, end, way, totalWeight){
 		this.start = start;
@@ -187,3 +190,4 @@ var allMatrices = fw.getAllMatrices();
 console.log('-----------ALL STEPS-----------')
 console.log(allMatrices)
 
+module.exports = FloydWarshall;
