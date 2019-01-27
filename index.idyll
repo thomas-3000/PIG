@@ -9,48 +9,41 @@ description:"my description" /]
   /]
 //[div className:"fixed"]
 //[section className:"article-body"]
-[var name:"x" value: 0 /]
-[var name:"y" value: 0 /]
+[var name:"dim" value:5 /]
 [var name:"newMatrix" value: 0 /]
-[var name:"row_comp" value:0 /]
-[var name:"col_comp" value:0 /]
-[var name:"show_lights" value:0 /]
-[var name:"show_comp" value:0 /]
-[var name:"show_marks" value:1 /]
-[var name:"show_borders" value:1 /]
-[var name:"ignite" value:0 /]
 [var name:"step" value:0 /]
+[var name:"k" value:1 /]
+[var name:"i" value:2 /]
+[var name:"j" value:2 /]
+[var name:"ignite" value:0 /]
+[var name:"k" value:1 /]
+// das sieht jetzt relativ scheiße aus, weil man nicht auf Sachen zugreifen,
+// welche in dem Ausdruck selber verändert werden
+// zB würde ich hier gerne oft auf "step" zugreifen, nachdem ich "step++" gemacht hab
+// Muss aber trotzdem immer "(step+1)" benutzen.
+[Button onClick: `
+    step++;
+    k = Math.floor( (step+1)/((dim-1)*(dim-1)))%(dim)+1;
+		i = (step+1)%(dim-1) +1;
+		if (((step+1)%(dim-1) +1)>=(Math.floor( (step+1)/((dim-1)*(dim-1)))%(dim)+1)){
+      i = (step+1)%(dim-1) +2;
+		};
+		j = Math.floor((step+1)/(dim-1))%(dim-1)+1;
+		if ((Math.floor((step+1)/(dim-1))%(dim-1)+1)>=(Math.floor( (step+1)/((dim-1)*(dim-1)))%(dim)+1)){
+			j = Math.floor((step+1)/(dim-1))%(dim-1)+2;
+		};
+    `]
+Step[/Button]
 
-
-//[fixed]
-//[D3Matrix className:"d3matrix" newRadius:newRadius /]
-//[/fixed]
-//[var name:"FW" value:0/]
-//[FloydWarshall ]
 
 ## Title
 [fixed]
-[D3Matrix row_light:x col_light:y newMatrix:newMatrix row_comp:row_comp col_comp:col_comp show_lights:show_lights show_comp:show_comp show_marks:show_marks show_borders:show_borders ignite:ignite/]
+[D3Matrix newMatrix:newMatrix ignite:ignite step:step i:i j:j k:k/]
 [/fixed]
 
+k=[Display value:k /],
+j=[Display value:j /],
+i=[Display value:i /],
+step = [Display value:step /]
 
 [button onClick: `if(ignite==0){ignite=1;}else{ignite=0}`]Ignite![/button]
-
-[button onClick:`if(show_lights==0){show_lights=1}else{show_lights=0}`]Lights on[/button]
-[button onClick:`show_comp=1`]Comparator[/button]
-x = [Display value:`x+1` format:"d" /]
-[button onClick:`x += 1`]x Up[/button]
-[button onClick:`x -= 1`]x Down[/button]
-y = [Display value:`y+1` format:"d" /]
-[button onClick:`y += 1`]y Up[/button]
-[button onClick:`y -= 1`]y Down[/button]
-row = [Display value:`row_comp+1` format:"d" /]
-[button onClick:`row_comp += 1`]row Up[/button]
-[button onClick:`row_comp -= 1`]row Down[/button]
-col = [Display value:`col_comp+1` format:"d" /]
-[button onClick:`col_comp += 1`]col Up[/button]
-[button onClick:`col_comp -= 1`]col Down[/button]
-[button onClick:`if(show_borders==1){show_borders=0;show_marks=1;}else{show_borders=1;show_marks=0;}`]toggle Borders[/button]
-[button onClick:`if(newMatrix==0){newMatrix=1} else{newMatrix=0} `] newMatrix [/button]
-
-[Display value:newMatrix /]
