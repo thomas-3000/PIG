@@ -1,5 +1,9 @@
 # PIG
 
+## Bug
+Duc, dein FloydWarshall gibt falsche Sachen aus. Vergleiche mal deine Matrizen mit denen im Cormen. 
+
+
 ## Klassen aufrufen in d3 klassen
 Es ist möglich Ducs Klassen aufzurufen. Nach 3 Tagen intensiver Recherche habe ich 
 herausgefunden, dass mein Aufruf falsch war und der nicht richtig abgefangen wurde (!). 
