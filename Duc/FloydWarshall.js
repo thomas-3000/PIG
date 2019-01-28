@@ -14,25 +14,28 @@ class FloydWarshall{
 	constructor(weights, numVertices){
 		this.infinity = 1000;
 		this.nullVal = null;
-		
+
 		this.allKMatrices = [];
-		
+
 		this.weights = weights;
 		this.numVertices = numVertices;
 		this.distances = this.initMatrix(this.infinity);
 		this.pi = this.initPiMatrix(this.nullVal);
 		this.path = this.initPiMatrix(this.nullVal);
-		
+
 		this.transfer();
 		this.startMatrix = new KthMatrix(-1,this.distances);
+		// BUG: Hätte gerne die initiale Matrix in allKMatrices,
+		// this.startMatrix ist iwie die falsche aber besser als nichts erstmal
+		this.allKMatrices.push(this.startMatrix);
 		this.floydWarshallModified();
 		this.getAllPaths();
 		// this.displayMatrix(this.distances);
 		console.log('-----------Vorgänger Matrix---------------');
 		this.displayMatrix(this.pi);
 	}// end of constructor
-	
-	
+
+
 	initMatrix(value){
 		var arr = [];
 		for (var i = 0; i < this.numVertices; i++){
@@ -49,7 +52,7 @@ class FloydWarshall{
 		console.log('DONE MATRIX');
 		return arr;
 	}// end of initMatrix
-	
+
 	initPiMatrix(value){
 		var arr = [];
 		for (var i = 0; i < this.numVertices; i++){
@@ -62,7 +65,7 @@ class FloydWarshall{
 		console.log('DONE MATRIX');
 		return arr;
 	}// end of initMatrix
-	
+
 	transfer(){
 		for(var i = 0; i<this.weights.length; i++){
 			var start = this.weights[i][0];
@@ -70,10 +73,10 @@ class FloydWarshall{
 			var weight = this.weights[i][2];
 			this.distances[start][end] = weight;
 			this.pi[start][end] = start;
-		} 
+		}
 		console.log('DONE transfer');
 	}//end transfer
-	
+
 	copyMatrix(oldMatrix){
 		var newMatrix = this.initMatrix(this.infinity);
 		for(var i = 0; i < this.numVertices; i++){
@@ -83,7 +86,7 @@ class FloydWarshall{
 		}
 		return newMatrix;
 	}
-	
+
 	displayMatrix(matrix){
 		console.log('Matrix');
 		var arrText = '';
@@ -96,7 +99,7 @@ class FloydWarshall{
 			console.log('');
 		}
 	}// end displayMatrix
-	
+
 	floydWarshallModified(){
 		for(var k = 0; k<this.numVertices; k++){
 			for(var i = 0; i<this.numVertices; i++){
@@ -116,7 +119,7 @@ class FloydWarshall{
 			this.allKMatrices.push(kMatrix);
 		} // end of k-loop
 	}// end of floydWarshallModified
-	
+
 	getAllPaths(){
 		for(var i = 0; i < this.pi.length;i++){
 			for(var j = 0; j < this.pi.length;j++){
@@ -139,7 +142,7 @@ class FloydWarshall{
 			}// end of j-loop
 		}//end of i-loop
 	}// end getAllPaths
-	
+
 	getSinglePath(start, end){
 		var path = this.path[start][end];
 		if(path == null){
@@ -150,7 +153,7 @@ class FloydWarshall{
 		console.log('pair	dist		path');
 		console.log(start+'->'+end+'	'+dist+'		'+way);
 	}
-	
+
 	getWeight_k(k, i, j){
 		if(k>this.allKMatrices.length){
 			console.log('k is out of range');
@@ -162,7 +165,7 @@ class FloydWarshall{
 		}else{
 			return this.startMatrix[i][j];
 		}
-		
+
 	}
 	getAllMatrices(){
 		return this.allKMatrices;

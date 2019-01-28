@@ -1,6 +1,12 @@
 const React = require('react');
 const D3Component = require('idyll-d3-component');
 const d3 = require('d3');
+const FloydWarshall = require('./FloydWarshall');
+//import * as FloydWarshall from "./FloydWarshall";  // funktioniert auch nicht
+const Kth = require('./KthMatrix');
+const NetW = require('./NetWork');
+const St = require('./Steps');
+const FitData = require('./FitData');
 
 const size = 6000;
 var w = 400;
@@ -19,6 +25,7 @@ const yCompDist = 30;
 const rectDist = 10;
 const dim = 5;
 
+
 function MatrixToList(matrix){
 	var data = [];
 	for (var i=0;i<dim;i++){
@@ -27,24 +34,81 @@ function MatrixToList(matrix){
 	return data;
 }
 
+function ducsToMatrix(ducs){
+	var dataset = [["","","","",""],
+						["","","","",""],
+						["","","","",""],
+						["","","","",""],
+						["","","","",""]];
+
+	for (var i=0;i<dim; i++){
+		for (var j=0; j<dim; j++){
+			if (ducs[i][j] == 1000){
+				dataset[i][j] = "∞";
+			}else{
+				dataset[i][j] = ducs[i][j].toString();
+			}
+		}
+	}
+	return dataset;
+}
+
+function updateMatrix(oldM,newM,i,j,k){
+	// update alle Spalten bereits überstrichener Zeilen...
+	for (var y=0;y<(i-1);y++){
+		if (y==(k-1)){
+			continue;
+		}
+		for (var x=0;x<dim; x++){
+			if (x==(k-1)){
+				continue;
+			}
+				console.log(x+1,y+1,"newM",newM[y][x],"oldM",oldM[y][x]);
+				oldM[y][x] = newM[y][x].toString();
+		}
+	}
+	// ... und die Einträge der aktuellen Zeile, welche überstrichen sind
+	for (var x=0;x<j;x++){
+		if (x==(k-1)){
+			continue;
+		}
+		//console.log(x+1,j,"newM",newM[i-1][x], "oldM",oldM[i-1][x]);
+		oldM[i-1][x] = newM[i-1][x].toString();
+	}
+	return oldM;
+}
+
+var weights = [
+	[0, 1, 3],
+	[0, 4, -4],
+	[0, 2, 8],
+	[1, 4, 7],
+	[1, 3, 1],
+	[2, 1, 4],
+	[3, 2, -5],
+	[3, 0, 2],
+	[4, 3, 6]
+];
+var numVertices = 5;
+const fw = new FloydWarshall(weights, numVertices);
+//console.log(fw.getAllMatrices())
+
 class D3Matrix extends D3Component {
+
+	//var selectedPath = fw.getSinglePath(0,1);
 	initialize(node,props){
     const canvas = this.canvas = d3.select(node)
                                     .append("svg")
                                     .attr("width",w)
                                     .attr("height",h);
 
-		const dataset2 = [["1","2","3","4","70"],
-											["5","∞","7","8","20"],
-											["9","10","∞","12","12"],
-										  ["13","∞","15","16","98"],
-										  ["1","2","3","4","70"]];
 
-
+		var Ducs = fw.getAllMatrices()[0].matrix;
+		// concatenate 2d array in one list
+		var data = MatrixToList(ducsToMatrix(Ducs));
 		// Group that contains every element of the Matrix
 		var matrixGroup = this.matrixGroup = canvas.append("g");
-		// concatenate 2d array in one list
-    var data = MatrixToList(dataset2);
+
 		// marks contains text to set around the matrix in order to see rows and cols
 		var marks = [];
 		for (var i=1;i<=dim;i++){
@@ -60,11 +124,13 @@ class D3Matrix extends D3Component {
 		}]
 		var rightMatrixBorder = [{x:xOffset+(dim-1)*xDistance+20,y:yOffset-15},{x:xMarkOffset+dim*xDistance+20,y:yOffset + 0.5*(dim-1)*yDistance },{x:xOffset + (dim-1)*xDistance+20,y:yOffset + (dim-1)*yDistance+15
 		}]
+		var ijk = ["1","1","1"];
 		// line genarator
 		var line = d3.line()
 			.x(function(d) {return d.x})
 			.y(function(d) {return d.y})
 			.curve(d3.curveBasis);
+
 
 		matrixGroup.append("path")
 			.attr("class","border")
@@ -188,6 +254,18 @@ class D3Matrix extends D3Component {
 			.attr("dominant-baseline","middle")
 			.attr("font-size",25);
 
+		matrixGroup.selectAll("text.ijk")
+			.data(ijk)
+			.enter()
+			.append("text")
+			.text(function(d) {return d;})
+			.attr("class", "ijk")
+			.attr("x",function(d,i) {return i%dim*xDistance+xOffset;})
+			.attr("y", function (d,i){return dim*yDistance+yOffset+20;})
+			.attr("text-anchor","middle")
+			.attr("dominant-baseline","middle")
+			.attr("font-size",25);
+
 		// place row and col marks
 		matrixGroup.selectAll("text.marks")
 			.data(marks)
@@ -219,24 +297,44 @@ class D3Matrix extends D3Component {
 
 
 
-  update(props, oldProps){
 
-		const newDataset = [["1","2","3","4","2"],
-											["9","10","∞","12","7"],
-											["5","∞","7","8","33"],
-											["13","∞","15","16","2"],
-											["5","∞","7","8","33"]];
-		var newData = MatrixToList(newDataset);
-		var rowLight = props['row_light'];
-		var colLight = props['col_light'];
-		var newMatrix = props['newMatrix'];
-		var rowComp = props['row_comp'];
-		var colComp = props['col_comp'];
-		var showHighlighter = props['show_lights'];
-		var showComparator = props['show_comp'];
-		var showMatrixBorders = props['show_borders'];
-		var showMarks = props['show_marks'];
+
+
+  update(props, oldProps){
+		var i = props['i'];
+		var j = props['j'];
+		var k = props['k'];
+		// keine ks unter null. in idyll schwer abzufangen
+		if (k<1){
+			k=1; i=1; j=1;
+		}
+		var initMatrix = ducsToMatrix(fw.startMatrix.matrix);
+		console.log("startmatrix", initMatrix);
+		var oldMatrix = ducsToMatrix(fw.getAllMatrices()[k-1].matrix);
+		var newMatrix = ducsToMatrix(fw.getAllMatrices()[k].matrix);
+		console.log(fw.getAllMatrices());
+		// currentMatrix hält den Teil der neuen Matrix, der bei i,j schon verändert ist
+		// und sonst Einträge der alten Matrix
+		var currentMatrix = updateMatrix(oldMatrix, newMatrix, i,j,k);
+		var currentList = MatrixToList(currentMatrix);
+
+		var step = props['step'];
+
+
+		var newIJK = [k,j,i];
+		var rowLight = k-1;
+		var colLight = k-1;
+		var rowComp = i-1;
+		var colComp = j-1;
 		var showAll = props['ignite'];
+		var showMarks = 0;
+		var showHighlighter = 0;
+		var showMatrixBorders = 0;
+		var showComparator = 0;
+		this.matrixGroup.selectAll("text.ijk")
+			.data(newIJK)
+			.text(function (d) {return d;});
+
 		if (showAll == 1){
 			showMarks =1; showHighlighter=1; showMatrixBorders=0;showComparator=1;
 		}else{
@@ -370,12 +468,22 @@ class D3Matrix extends D3Component {
 			});
 
 			//change Matrix
-		if (newMatrix!=0){
-			this.matrixGroup.selectAll("text.elements")
-				.data(newData)
-				.text( function(d) {return d;});
-		}
+		this.matrixGroup.selectAll("text.elements")
+			.data(currentList)
+			.text( function(d) {return d;});
 	}
 }
 
 module.exports = D3Matrix;
+
+
+// FALLS wir doch nochmal i,j,k updaten wollen:
+// var k = Math.floor(step/((dim-1)*(dim-1)))%(dim)+1;
+// var i = step%(dim-1) +1;
+// if (i>=k){
+// 	i++;
+// }
+// var j = Math.floor(step/(dim-1))%(dim-1)+1;
+// if (j>=k){
+// 	j++;
+// }
