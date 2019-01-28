@@ -1,5 +1,8 @@
 # PIG
 
+## 
+Duc, dein FLoydWarshall gibt bei getAllMatrices nicht die initiale Matrix mit, wenn ich das richtig sehe
+
 ## Bug
 Duc, dein FloydWarshall gibt falsche Sachen aus. Vergleiche mal deine Matrizen mit denen im Cormen. 
 
