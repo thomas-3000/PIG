@@ -2,13 +2,9 @@ const React = require('react');
 const D3Component = require('idyll-d3-component');
 const d3 = require('d3');
 const FloydWarshall = require('./FloydWarshall');
-//import * as FloydWarshall from "./FloydWarshall";  // funktioniert auch nicht
-const Kth = require('./KthMatrix');
-const NetW = require('./NetWork');
-const St = require('./Steps');
-const FitData = require('./FitData');
 
-const size = 6000;
+
+//const size = 6000;
 var w = 400;
 var h = 400;
 
@@ -54,6 +50,11 @@ function ducsToMatrix(ducs){
 }
 
 function updateMatrix(oldM,newM,i,j,k){
+	var tempM = [["","","","",""],
+						["","","","",""],
+						["","","","",""],
+						["","","","",""],
+						["","","","",""]];
 	// update alle Spalten bereits überstrichener Zeilen...
 	for (var y=0;y<(i-1);y++){
 		if (y==(k-1)){
@@ -63,8 +64,7 @@ function updateMatrix(oldM,newM,i,j,k){
 			if (x==(k-1)){
 				continue;
 			}
-				console.log(x+1,y+1,"newM",newM[y][x],"oldM",oldM[y][x]);
-				oldM[y][x] = newM[y][x].toString();
+				tempM[y][x] = newM[y][x].toString();
 		}
 	}
 	// ... und die Einträge der aktuellen Zeile, welche überstrichen sind
@@ -73,9 +73,14 @@ function updateMatrix(oldM,newM,i,j,k){
 			continue;
 		}
 		//console.log(x+1,j,"newM",newM[i-1][x], "oldM",oldM[i-1][x]);
-		oldM[i-1][x] = newM[i-1][x].toString();
+		tempM[i-1][x] = newM[i-1][x].toString();
 	}
-	return oldM;
+	for (var y=0;y<dim;y++){
+		for (var x=0;x<dim;x++){
+			if (tempM[y][x] == ""){tempM[y][x] = oldM[y][x]}
+		}
+	}
+	return tempM;
 }
 
 var weights = [
@@ -91,11 +96,8 @@ var weights = [
 ];
 var numVertices = 5;
 const fw = new FloydWarshall(weights, numVertices);
-//console.log(fw.getAllMatrices())
 
 class D3Matrix extends D3Component {
-
-	//var selectedPath = fw.getSinglePath(0,1);
 	initialize(node,props){
     const canvas = this.canvas = d3.select(node)
                                     .append("svg")
@@ -241,6 +243,15 @@ class D3Matrix extends D3Component {
 			.attr("fill","green")
 			.attr("opacity",0);
 
+		//	for (var x=0;x<dim;x++){
+		// 	for (var y=0;y<dim;y++){
+		// 		matrixGroup.selectAll("text.",i,j)
+		// 			.data(data[i][j])
+		// 			.append("text")
+		// 			.attr("class",i,j)
+		// 			.attr("x",)
+		// 	}
+		// }
 		// place matrix elements
     matrixGroup.selectAll("text.elements")
 			.data(data)
@@ -254,17 +265,17 @@ class D3Matrix extends D3Component {
 			.attr("dominant-baseline","middle")
 			.attr("font-size",25);
 
-		matrixGroup.selectAll("text.ijk")
-			.data(ijk)
-			.enter()
-			.append("text")
-			.text(function(d) {return d;})
-			.attr("class", "ijk")
-			.attr("x",function(d,i) {return i%dim*xDistance+xOffset;})
-			.attr("y", function (d,i){return dim*yDistance+yOffset+20;})
-			.attr("text-anchor","middle")
-			.attr("dominant-baseline","middle")
-			.attr("font-size",25);
+		// matrixGroup.selectAll("text.ijk")
+		// 	.data(ijk)
+		// 	.enter()
+		// 	.append("text")
+		// 	.text(function(d) {return d;})
+		// 	.attr("class", "ijk")
+		// 	.attr("x",function(d,i) {return i%dim*xDistance+xOffset;})
+		// 	.attr("y", function (d,i){return dim*yDistance+yOffset+20;})
+		// 	.attr("text-anchor","middle")
+		// 	.attr("dominant-baseline","middle")
+		// 	.attr("font-size",25);
 
 		// place row and col marks
 		matrixGroup.selectAll("text.marks")
@@ -318,9 +329,7 @@ class D3Matrix extends D3Component {
 		var currentMatrix = updateMatrix(oldMatrix, newMatrix, i,j,k);
 		var currentList = MatrixToList(currentMatrix);
 
-		var step = props['step'];
-
-
+		//var step = props['step'];
 		var newIJK = [k,j,i];
 		var rowLight = k-1;
 		var colLight = k-1;
@@ -466,13 +475,97 @@ class D3Matrix extends D3Component {
 				colLight = colLight%dim;
 				return yOffset-15+colLight*yDistance;
 			});
+		//change Matrix
+		// text transition: https://bl.ocks.org/mbostock/f7dcecb19c4af317e464
 
-			//change Matrix
 		this.matrixGroup.selectAll("text.elements")
 			.data(currentList)
 			.text( function(d) {return d;});
+
+
+		console.log("blend red: i",i,"j",j,(j-1)+(5*(i-1)));
+		console.log("blend green:i",i,"k",k,(k-1)+(dim*(i-1)));
+		console.log(oldMatrix[i-1][j-1], newMatrix[i-1][j-1]);
+
+		// animation if there is a change in the matrix
+		if (oldMatrix[i-1][j-1] != newMatrix[i-1][j-1]){
+			this.matrixGroup.selectAll("text.elements").filter(function (d,n) {
+									return n === (j-1)+(dim*(i-1));
+								})
+				.style("opacity", 0)
+				.transition().duration(200)
+				.style("opacity", 1)
+				.attr("fill","red")
+				.attr("font-size",35);
+
+			this.matrixGroup.selectAll("text.elements").filter(function(d,n){
+									return n === (k-1)+(dim*(i-1));
+								})
+				.style("opacity", 0)
+				.transition().duration(200)
+				.style("opacity", 1)
+				.attr("fill","green")
+				.attr("font-size",30);
+
+			this.matrixGroup.selectAll("text.elements").filter(function(d,n){
+									return n === (j-1)+(dim*(k-1));
+								})
+				.style("opacity", 0)
+				.transition().duration(200)
+				.style("opacity", 1)
+				.attr("fill","green")
+				.attr("font-size",30);
+
+			// HERE I want to move copies of the comparator values to move to the new value
+
+			// Get value of current comparators
+			// Erst für Spalte k, dann für Zeile k
+			// var cloneData = [currentMatrix[i-1][k-1],currentMatrix[k-1][j-1]];
+			// var cloneXPosition = [xOffset + ((i-1)*dim+(k-1))%dim*xDistance, xOffset + ((k-1)*dim+(j-1))%dim*xDistance];
+			// var cloneYPosition = [Math.floor(((i-1)*dim+(k-1))/dim)*yDistance+yOffset, Math.floor(((k-1)*dim+(j-1))/dim)*yDistance+yOffset];
+			// this.matrixGroup.selectAll("text.clones")
+			// 	.data(cloneData)
+			// 	.enter()
+			// 	.append("text")
+			// 	.text(function(d) {return d;})
+			// 	.attr("class", "clones")
+			// 	.attr("x",function(d,i){return cloneXPosition[i]})
+			// 	.attr("y",function(d,i){return cloneYPosition[i]})
+			// 	.attr("text-anchor","middle")
+			// 	.attr("dominant-baseline","middle")
+			// 	.attr("font-size",35);
+
+		}
+
+		// make all others one black again
+		console.log("blend black i",i,"j",j,j-2 + (5*(i-1)));
+		this.matrixGroup.selectAll("text.elements").filter(function (d,n) {
+								return n !== (j-1) +(5*(i-1));
+							})
+				.attr("fill","black")
+				.attr("font-size",25);
+
+		// console.log(cell.node());
+		// this.matrixGroup.selectAll("text.elements")
+		//  	.attr("fill","red")
+		// 	.attr("font-size",35);
+
 	}
 }
+
+
+// var t = d3.active(this)
+// 		.style("opacity", 0)
+// 		.remove();
+//
+// d3.select("body").append("h1")
+// 		.style("opacity", 0)
+// 		.text(format(Math.random() * 1e6))
+// 	.transition(t)
+// 		.style("opacity", 1)
+// 	.transition()
+// 		.delay(1500)
+// 		.on("start", repeat);
 
 module.exports = D3Matrix;
 
