@@ -5,14 +5,14 @@ class FitData{
 		this.xy = [];
 		this.links = [];
 		this.radius = (height/2)-50;
-		
+
 		this.calculate();
 		this.fitData();
 		this.nodes = this.extractNodes();
 		this.fuseData();
-		
+
 	}
-	
+
 	calculate(){
 		var factor = 1;
 		var circle = 2*Math.PI;
@@ -31,14 +31,14 @@ class FitData{
 		console.log("this.xy");
 		console.log(this.xy);
 	}
-	
+
 	fuseData(){
 		console.log("xyValue");
 		for (var i = 0 ; i< this.numOfNodes; i++){
 			var xyValue = this.xy[i];
 			var x = xyValue[0];
 			var y = xyValue[1];
-			
+
 			console.log(xyValue);
 			this.nodes[i].x = x;
 			this.nodes[i].y = y;
@@ -47,8 +47,8 @@ class FitData{
 		console.log("this.nodes");
 		console.log(this.nodes);
 	}
-	
-	
+
+
 	fitData(){
 		for(var i = 0; i<this.dataSet.length;i++){
 			var step = this.dataSet[i];
@@ -60,7 +60,7 @@ class FitData{
 		}
 		console.log(this.links);
 	}
-	
+
 	extractNodes(){
 		var nodes = {};
 		this.links.forEach(function(link){
@@ -74,12 +74,14 @@ class FitData{
  		console.log("nodes");
  		return nodes;
 	}
-	
+
 	getlinkData(){
 		return this.links;
 	}
-	
+
 	getNodesData(){
 		return this.nodes;
 	}
 }
+
+module.exports = FitData;
