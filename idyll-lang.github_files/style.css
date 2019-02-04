@@ -1,0 +1,121 @@
+
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono:400,500,700|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i');
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+.minidocs-sidebar {
+  background: #EAE7D6;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+.minidocs-sidebar .h1:before {
+    content: '';
+}
+
+.minidocs-sidebar a.content-link:hover {
+  background: inherit;
+}
+.minidocs-sidebar a.content-link.active {
+  background: inherit;
+  font-weight: bold;
+}
+
+.minidocs-sidebar .minidocs-logo {
+  height: 70px;
+  /*width: auto;*/
+}
+
+p, .minidocs-content {
+  font-size: 1.15rem;
+  line-height: 1.75rem;
+}
+
+.minidocs-sidebar .minidocs-header {
+  /*margin: 0;*/
+}
+
+h1,h2,h3,h4,h5,h6,
+.h1,.h2,.h3,.h4,.h5,.h6 {
+  /*font-family: "Fira Mono", monospace !important;*/
+
+}
+
+.markdown-body .anchor {
+  margin-left: 0;
+}
+.content-link {
+
+}
+
+.markdown-body img {
+  max-width: 75%;
+  margin: 60px auto;
+  display: block;
+}
+
+
+
+.example {
+  width: 33%;
+  text-align: center;
+  display: inline-block;
+  margin-bottom: 30px;
+  background-color: #f7f7f7;
+  padding: 15px;
+}
+
+.example a {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  display: block;
+}
+
+.example .example-image {
+  width: 100%;
+  height: 275px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media all and (max-width: 600px) {
+  .minidocs-sidebar .minidocs-header h1 {
+    margin-top: 0;
+  }
+
+  .minidocs-main {
+    padding: 20px;
+  }
+
+  .minidocs-menu-toggle {
+    font-size: 0 !important;
+    top: 15px !important;
+    left: 20px !important;
+  }
+
+  .minidocs-menu-toggle:before {
+    background: #f7f7f7 !important;
+    box-shadow: 0 0.25em 0 0 #f7f7f7, 0 0.5em 0 0 #f7f7f7 !important;
+    font-size: 40px !important;
+  }
+
+  .markdown-body img {
+    max-width: 100%;
+    margin: 30px auto;
+  }
+
+  .example {
+    width: 95%;
+    margin: 0 auto;
+  }
+
+}

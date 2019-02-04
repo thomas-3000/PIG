@@ -1,0 +1,41 @@
+/*
+.d3-component svg {
+  background: #ddd;
+  max-height: 400px;
+}
+
+@media all and (max-width: 1000px) {
+  .d3-component svg {
+    max-height: 400px;
+  }
+}
+*/
+/*
+p {
+  background-color: white;
+  /* color: #377eb8ff;
+  /* font-family: "Times New Roman", Times, serif;
+}
+*/
+
+h {
+  font-family:"Futura" ;
+}
+h2 {
+  font-family:"Futura" ;
+}
+h3 {
+  font-family:"Futura" ;
+}
+div {
+  font-family:"Futura" ;
+}
+
+
+
+@font-face {
+    font-family: 'Futura';
+    src: url('file:///home/ben/Downloads/ufonts.com_futura-opentype.otf');
+    font-weight: normal;
+    font-style: normal;
+}

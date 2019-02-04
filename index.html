@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<style>
+		.node{
+			fill:#ccc;
+			stroke:#fff;
+			stroke-width: 2px;
+		}
+		
+		.link{
+			stroke:#777;
+			stroke-width: 2px;
+			troke-opacity: 0.6;
+		}
+		
+		marker#arrow {
+		      stroke: #999;
+		      fill: #999;
+	      }
+		
+	</style>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>index</title>
+		<meta name="author" content="Dao Duc" />
+		<!-- Date: 2019-01-13 -->
+	</head>
+	<body>
+		<svg id="cloud" width="1" height="6">
+            <defs>
+                <marker id="arrow" viewbox="0 -5 10 10" refX="18" refY="0"
+                        markerWidth="20" markerHeight="100" orient="auto">
+                    <path d="M0,-5L10,0L0,5Z">
+                </marker>
+           </defs>
+        </svg>
+     </body>
+        
+		<h1>Object Oriented JavaScript</h1>
+
+		<script src="d3.v3.js" type="text/javaScript"></script>
+        <script src="KthMatrix.js"></script>
+        <script src="Steps.js"></script>
+        <script src="FloydWarshall.js"></script>
+        <script src="FitData.js"></script>
+        <script src="NetWork.js"></script>
+        <script src="Main.js"></script>
+        
+        <script>
+        
+        //--------------------------------Test--------------------------------
+			var weights = [
+			  	[0, 1, 3],
+			 	[0, 4, -4],
+			 	[0, 2, 8],
+			 	[1, 4, 7],
+				[1, 3, 1],
+				[2, 1, 4],
+				[3, 2, -5],
+				[3, 0, 2],
+				[4, 3, 6]
+			];
+			var numVertices = 5;
+			
+			var fitData = new FitData(weights);
+			var links = fitData.getlinkData();
+			var nodes = fitData.getNodesData();
+			
+			var fw = new FloydWarshall(weights, numVertices);
+			var allSteps = new Steps(fw);
+			
+			// liefert alle kth Matricen zurück
+			// um zu sehen wie ein Object der Klasse KthMatrix aufgebaut ist, Attribute anschaun
+			var allMatrices = fw.getAllMatrices();
+			
+			// liefert alle Schritte der Berechung
+			var steps = allSteps.getAllSteps();
+			
+			console.log('-----------ALL STEPS-----------')
+			allSteps.dispAllSteps();
+
+        		var width = 1200,
+        			height = 600;
+        		
+        		
+        		var netWork  = new NetWork(links,nodes, width, height );
+        			
+        		function tick(e){
+        			netWork.perform();
+        		}
+        		
+
+        		</script>
+	
+</html>
+
