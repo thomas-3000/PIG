@@ -26,8 +26,8 @@ description:"my description" /]
   // wir brauchen hier ne componente, die nichts anzeigt, weil ich das anders
   // mit React nicht hinbekommen hab
   [blankComponent /]
-  // Plazuhalter für Ducs Graphen
-  [CustomD3Component j:j /]
+  // Ducs Graph
+  [Network /]
 
   [D3Matrix ignite:ignite i:i j:j k:k/]
   [Button onClick: `if(ignite==0){ignite=1;}else{ignite=0}`]Ignite![/Button]
@@ -73,7 +73,6 @@ step = [Display value:step /]
 visnum = [Display value:visnum /]
 
 Die initiale Matrix ist falsch. Ab k=2 funktioniert es wunderbar.
-
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
 ut labore et dolore magna aliqua. Ut enim ad minim
