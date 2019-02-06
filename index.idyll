@@ -3,10 +3,9 @@
   title:"Idyll testing 2222"
 description:"my description" /]
 [Header
-  title:"Data Visualization"
-  subtitle:"The playground 2"
-  author:"Ben"
-  /]
+  title:"Kürzeste Wege in Netzwerken"
+  subtitle:"Am Beispiel des Floyd-Warshall Algorithmus"
+  author:"D,T,B"/]
 //[div className:"fixed"]
 //[section className:"article-body"]
 [var name:"dim" value:5 /]
@@ -20,7 +19,7 @@ description:"my description" /]
 [var name:"visnum" value:0 /]
 
 
-## Title
+## Pathfinding in Networks
 [Button onClick: `if (visnum==0){visnum=1}else{visnum=0}`] Change Vis [/Button]
 [Fixed2 visnum:visnum]
   // wir brauchen hier ne componente, die nichts anzeigt, weil ich das anders
@@ -71,32 +70,75 @@ j=[Display value:j /],
 i=[Display value:i /],
 step = [Display value:step /]
 visnum = [Display value:visnum /]
+[Button onClick: `if(ignite==0){ignite=1;}else{ignite=0}`]Ignite![/Button]
+// das sieht jetzt relativ scheiße aus, weil man nicht auf Sachen zugreifen,
+// welche in dem Ausdruck selber verändert werden
+// zB würde ich hier gerne oft auf "step" zugreifen, nachdem ich "step++" gemacht hab
+// Muss aber trotzdem immer "(step+1)" benutzen.
+[Button onClick: `
+    step--;
+    k = Math.floor( (step-1)/((dim-1)*(dim-1)))%(dim)+1;
+    j = (step-1)%(dim-1) +1;
+    // if j>=k: j++
+    if (((step-1)%(dim-1) +1)>=(Math.floor( (step-1)/((dim-1)*(dim-1)))%(dim)+1)){
+      j = (step-1)%(dim-1) +2;
+    };
+    i = Math.floor((step-1)/(dim-1))%(dim-1)+1;
+    // if i>=k: i++
+    if ((Math.floor((step-1)/(dim-1))%(dim-1)+1)>=(Math.floor( (step-1)/((dim-1)*(dim-1)))%(dim)+1)){
+      i = Math.floor((step-1)/(dim-1))%(dim-1)+2;
+    };
+    `]
+<[/Button] [Button onClick: `
+    step++;
+    k = Math.floor( (step+1)/((dim-1)*(dim-1)))%(dim)+1;
+    j = (step+1)%(dim-1) +1;
+    // if j>=k: j++
+    if (((step+1)%(dim-1) +1)>=(Math.floor( (step+1)/((dim-1)*(dim-1)))%(dim)+1)){
+      j = (step+1)%(dim-1) +2;
+    };
+    i = Math.floor((step+1)/(dim-1))%(dim-1)+1;
+    // if i>=k: i++
+    if ((Math.floor((step+1)/(dim-1))%(dim-1)+1)>=(Math.floor( (step+1)/((dim-1)*(dim-1)))%(dim)+1)){
+      i = Math.floor((step+1)/(dim-1))%(dim-1)+2;
+    };
+    `]
+>[/Button]
 
-Die initiale Matrix ist falsch. Ab k=2 funktioniert es wunderbar.
+Pics von wikipedia (public domain) [link text:"Graph" url:"https://de.wikipedia.org/wiki/Graph_(Graphentheorie)" /]
+### Was ist ein Netzwerk?
+Ein Netzwerk besteht aus einer Menge von eindeutigen Punkten, die Knoten genannt werden.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-ut labore et dolore magna aliqua. Ut enim ad minim
-veniam, quis nostrud exercitation ullamco laboris nisi ut
-aliquip ex ea commodo consequat. Duis aute irure dolor
+[SVG src:"static/images/Nodes2.svg" /]
+[br/]
+Diese Knoten können durch sogenannte Kanten verbunden sein. Gilt die Kante zwischen zwei Knoten
+für beide Richtungen, so spricht man von einem ungerichteten Graphen
+//(Netzwerk wäre hier iwie falsch).
+
+[SVG src:"static/images/Undirected2.svg" /]
+
+Im Gegenteil kann auch eine Kante nur für eine Richtung gelten. Deshalb wird der folgende Graph auch
+gerichteter Graph genannt.
+
+[SVG src:"static/images/Directed3.svg" /]
+
+Außerdem kann jede Kante ein Gewicht haben. Das nächste Bild zeigt einen vollständigen Graphen.
+
+[SVG src:"static/images/WithWeights.svg" /]
+
+//[action onClick:`alert('👍 🎉');`]action links[/action]
+
+
 in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 Excepteur sint occaecat cupidatat non proident,
 sunt in culpa qui officia deserunt mollit anim id est laborum.
-// [Fixed2]
-// [CustomD3Component j:j /]
-// [/Fixed2]
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
 ut labore et dolore magna aliqua. Ut enim ad minim
 veniam, quis nostrud exercitation ullamco laboris nisi ut
 aliquip ex ea commodo consequat. Duis aute irure dolor
 in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 Excepteur sint occaecat cupidatat non proident,
-sunt in culpa qui officia deserunt mollit anim id est laborum.
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-ut labore et dolore magna aliqua. Ut enim ad minim
-veniam, quis nostrud exercitation ullamco laboris nisi ut
-aliquip ex ea commodo consequat. Duis aute irure dolor
-in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-Excepteur sint occaecat cupidatat non proident,
+[d3Pseudocode state:step /]
 sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
 ut labore et dolore magna aliqua. Ut enim ad minim
 veniam, quis nostrud exercitation ullamco laboris nisi ut
