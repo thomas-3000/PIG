@@ -41,13 +41,13 @@ class D3Pseudocode extends D3Component {
 							.attr("stroke-width", 3)
 							.attr("stroke-opacity","0.9");
 			//Highlightzeile
-			PseudocodeGroup.append("rect")
-							.attr("class", "highlighter")
-							.attr("x", 5)
-							.attr("y", highlightline*33)
-							.attr("width", 520)
-							.attr("height", 27)
-							.attr("fill", "lightblue")
+			//PseudocodeGroup.append("rect")
+			//				.attr("class", "highlighter")
+			//				.attr("x", 5)
+			//				.attr("y", highlightline*33)
+			//				.attr("width", 520)
+			//				.attr("height", 27)
+			//				.attr("fill", "lightblue")
 			//Zeilennummern
 			PseudocodeGroup.append("text")
 							.attr("x",10)
@@ -116,7 +116,7 @@ class D3Pseudocode extends D3Component {
 					        .attr("y",80)
 					        .attr("class", "textzeile")
 							.style("font-size", "12px")
-							.text("(0)");
+							.text("(1)");
 			PseudocodeGroup.append("text")
 			            	.attr("x",40)
 					        .attr("y",121)
@@ -141,21 +141,28 @@ class D3Pseudocode extends D3Component {
 					        .attr("class", "textzeile")
 							.style("font-size", "20px")
 							.style("white-space", "pre")
-							.text("D   = min(D    ,D    + D    )");
+							.text("D   = min(D    ,D");
 			PseudocodeGroup.append("text")
-							.attr("x",84)
+							.attr("x",264)
+							.attr("y",220)
+							.attr("class", "textzeile")
+							.style("font-size", "20px")
+							.style("white-space", "pre")
+							.text("+D    )");
+			PseudocodeGroup.append("text")
+							.attr("x",81)
 							.attr("y",212)
 							.attr("class", "textzeile")
 							.style("font-size", "12px")
 							.style("white-space", "pre")
-							.text("(k)                         (k-1)      (k-1)           (k-1)");
+							.text(" (k)                      (k-1)    (k-1)        (k-1)");
 			PseudocodeGroup.append("text")
-							.attr("x",92)
+							.attr("x",90)
 							.attr("y",224)
 							.attr("class", "textzeile")
 							.style("font-size", "12px")
 							.style("white-space", "pre")
-							.text("i,j                             i,j          i,k               k,j");
+							.text("i,j                         i,j        i,k           k,j");
 			PseudocodeGroup.append("text")
 					        .attr("x",30)
 					        .attr("y",253)
@@ -163,132 +170,187 @@ class D3Pseudocode extends D3Component {
 							.style("font-size", "20px")
 							.text("return D");
 			PseudocodeGroup.append("text")
-							.attr("x",105)
+							.attr("x",117)
 							.attr("y",245)
 							.attr("class", "textzeile")
 							.style("font-size", "12px")
 							.text("(n)");
 			//Variableneinblendungen
 			PseudocodeGroup.append("text")
-			            	.attr("x",325)
+			            	.attr("x",335)
 					        .attr("y",121)
 					        .attr("class", "vartext")
 							.style("font-size", "20px")
 							.style("fill","#FF1493")
 							.text("k=");
 			PseudocodeGroup.append("text")
-					        .attr("x",325)
+					        .attr("x",335)
 					        .attr("y",154)
 					        .attr("class", "vartext")
 							.style("font-size", "20px")
 							.style("fill","#FF1493")
 							.text("i=");
 			PseudocodeGroup.append("text")
-					        .attr("x",325)
+					        .attr("x",335)
 					        .attr("y",187)
 					        .attr("class", "vartext")
 							.style("font-size", "20px")
 							.style("fill","#FF1493")
 							.text("j=");
 			PseudocodeGroup.append("text")
-			            	.attr("x",345)
+			            	.attr("x",363)
 					        .attr("y",121)
-					        .attr("class", "vartext")
-							.style("font-size", "20px")
-							.style("fill","#FF1493")
-							.text(i);
-			PseudocodeGroup.append("text")
-					        .attr("x",345)
-					        .attr("y",154)
-					        .attr("class", "vartext")
-							.style("font-size", "20px")
-							.style("fill","#FF1493")
-							.text(j);
-			PseudocodeGroup.append("text")
-					        .attr("x",345)
-					        .attr("y",187)
-					        .attr("class", "vartext")
+					        .attr("class", "vartext_k")
 							.style("font-size", "20px")
 							.style("fill","#FF1493")
 							.text(k);
 			PseudocodeGroup.append("text")
-							.attr("x",325)
+					        .attr("x",363)
+					        .attr("y",154)
+					        .attr("class", "vartext_i")
+							.style("font-size", "20px")
+							.style("fill","#FF1493")
+							.text(i);
+			PseudocodeGroup.append("text")
+					        .attr("x",363)
+					        .attr("y",187)
+					        .attr("class", "vartext_j")
+							.style("font-size", "20px")
+							.style("fill","#FF1493")
+							.text(j);
+			PseudocodeGroup.append("text")
+							.attr("x",335)
 							.attr("y",220)
 							.attr("class", "vartext")
 							.style("font-size", "20px")
 							.style("white-space", "pre")
 							.style("fill","#FF1493")
-							.text("D   =min(  ,  +  )=");
+							.text("D   =min(");
 			PseudocodeGroup.append("text")
-							.attr("x",340)
+							.attr("x",442)
+							.attr("y",220)
+							.attr("class", "vartext")
+							.style("font-size", "20px")
+							.style("white-space", "pre")
+							.style("fill","#FF1493")
+							.text(",");
+			PseudocodeGroup.append("text")
+							.attr("x",458)
+							.attr("y",220)
+							.attr("class", "vartext")
+							.style("font-size", "20px")
+							.style("white-space", "pre")
+							.style("fill","#FF1493")
+							.text("+ )=");
+			PseudocodeGroup.append("text")
+							.attr("x",350)
 							.attr("y",212)
 							.attr("class", "vartext")
 							.style("font-size", "12px")
+							.style("white-space", "pre")
 							.style("fill","#FF1493")
-							.text("(k)");
+							.text("( )");
 			PseudocodeGroup.append("text")
-							.attr("x",350)
+							.attr("x",353)
+							.attr("y",212)
+							.attr("class", "vartextmink")
+							.style("font-size", "11px")
+							.style("white-space", "pre")
+							.style("fill","#FF1493")
+							.text("k");
+			PseudocodeGroup.append("text")
+							.attr("x",354)
 							.attr("y",224)
 							.attr("class", "vartext")
 							.style("font-size", "12px")
 							.style("white-space", "pre")
 							.style("fill","#FF1493")
-							.text("i,j");
+							.text(" , ");
 			PseudocodeGroup.append("text")
-							.attr("x",407)
+							.attr("x",352)
+							.attr("y",224)
+							.attr("class", "vartextmini")
+							.style("font-size", "11px")
+							.style("white-space", "pre")
+							.style("fill","#FF1493")
+							.text("i");
+			PseudocodeGroup.append("text")
+							.attr("x",362)
+							.attr("y",224)
+							.attr("class", "vartextminj")
+							.style("font-size", "11px")
+							.style("white-space", "pre")
+							.style("fill","#FF1493")
+							.text("j");
+			PseudocodeGroup.append("text")
+							.attr("x",430)
 							.attr("y",220)
-							.attr("class", "vartext")
+							.attr("class", "vartextmin1")
 							.style("font-size", "20px")
 							.style("white-space", "pre")
 							.style("fill","#FF1493")
 							.text("8");
 			PseudocodeGroup.append("text")
-							.attr("x",426)
+							.attr("x",447)
 							.attr("y",220)
-							.attr("class", "vartext")
+							.attr("class", "vartextmin2")
 							.style("font-size", "20px")
 							.style("white-space", "pre")
 							.style("fill","#FF1493")
 							.text("6");
 			PseudocodeGroup.append("text")
-							.attr("x",450)
+							.attr("x",472)
 							.attr("y",220)
-							.attr("class", "vartext")
+							.attr("class", "vartextmin3")
 							.style("font-size", "20px")
 							.style("fill","#FF1493")
-							.text("1");
+							.text("8");
 			PseudocodeGroup.append("text")
-							.attr("x",483)
+							.attr("x",505)
 							.attr("y",220)
-							.attr("class", "vartext")
+							.attr("class", "vartextmin4")
 							.style("font-size", "20px")
 							.style("fill","#FF1493")
-							.text("7");
+							.text("8");
 
 	}
 
 	update(props,oldProps) {
 		var newPseudocode = props['newPseudocode'];
 		var state = props['state'];
-		if (state<0) {
-			state=0;
-		}
-		if (state>7) {
-			state=7;
-		}
+			i = props['i'];
+			j = props['j'];
+			k = props['k'];
+		if (state<0) {state=0;}
+		if (state>7) {state=7;}
 		highlightline=state;
-		if (newPseudocode!=0){
-			if (highlightline==0) {
-				this.PseudocodeGroup.selectAll("rect.highlighter")
-					.attr("y",7);
-			}
-			else {
-				this.PseudocodeGroup.selectAll("rect.highlighter")
-					.attr("y",(highlightline*33));
-
-			}
+		//	if (highlightline==0) {
+		//		this.PseudocodeGroup.selectAll("rect.highlighter")
+		//			.attr("y",7);	}
+		//	else {
+		//		this.PseudocodeGroup.selectAll("rect.highlighter")
+		//			.attr("y",(highlightline*33)); }
+		this.PseudocodeGroup.selectAll("text.vartext_i")
+							.text(i);
+		this.PseudocodeGroup.selectAll("text.vartext_j")
+							.text(j);
+		this.PseudocodeGroup.selectAll("text.vartext_k")
+							.text(k);
+		this.PseudocodeGroup.selectAll("text.vartextmin1")
+							.text(i);
+		this.PseudocodeGroup.selectAll("text.vartextmin2")
+							.text(i+k);
+		this.PseudocodeGroup.selectAll("text.vartextmin3")
+							.text(j+k);
+		this.PseudocodeGroup.selectAll("text.vartextmin4")
+							.text(i+j);
+		this.PseudocodeGroup.selectAll("text.vartextmink")
+							.text(k);
+		this.PseudocodeGroup.selectAll("text.vartextmini")
+							.text(i);
+		this.PseudocodeGroup.selectAll("text.vartextminj")
+							.text(j);
 		}
 	}
-}
 
 module.exports = D3Pseudocode;
