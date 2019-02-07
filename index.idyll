@@ -105,6 +105,8 @@ visnum = [Display value:visnum /]
     `]
 >[/Button]
 
+[D3Pseudocode className:"d3-component" newPseudocode:newPseudocode state:state i:i k:k j:j/]
+
 Pics von wikipedia (public domain) [link text:"Graph" url:"https://de.wikipedia.org/wiki/Graph_(Graphentheorie)" /]
 ### Was ist ein Netzwerk?
 Ein Netzwerk besteht aus einer Menge von eindeutigen Punkten, die Knoten genannt werden.
