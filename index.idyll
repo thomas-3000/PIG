@@ -1,9 +1,9 @@
 
 [meta
-  title:"Idyll testing 2222"
+  title:"Netzwerk"
 description:"my description" /]
 [Header
-  title:"Kürzeste Wege in Netzwerken"
+  title:"KÜRZESTE WEGE IN NETZWERKEN"
   subtitle:"Am Beispiel des Floyd-Warshall Algorithmus"
   author:"D,T,B"/]
 //[div className:"fixed"]
@@ -19,7 +19,7 @@ description:"my description" /]
 [var name:"visnum" value:0 /]
 
 
-## Pathfinding in Networks
+# Pathfinding in Networks
 [Button onClick: `if (visnum==0){visnum=1}else{visnum=0}`] Change Vis [/Button]
 [Fixed2 visnum:visnum]
   // wir brauchen hier ne componente, die nichts anzeigt, weil ich das anders
@@ -106,7 +106,7 @@ visnum = [Display value:visnum /]
 >[/Button]
 
 Pics von wikipedia (public domain) [link text:"Graph" url:"https://de.wikipedia.org/wiki/Graph_(Graphentheorie)" /]
-### Was ist ein Netzwerk?
+## Netzwerk
 Ein Netzwerk besteht aus einer Menge von eindeutigen Punkten, die Knoten genannt werden.
 
 [SVG src:"static/images/Nodes2.svg" /]
@@ -126,19 +126,11 @@ Außerdem kann jede Kante ein Gewicht haben. Das nächste Bild zeigt einen volls
 
 [SVG src:"static/images/WithWeights.svg" /]
 
-//[action onClick:`alert('👍 🎉');`]action links[/action]
+
+[action onClick:`alert('👍 🎉');`]action links[/action]
 
 
-in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-Excepteur sint occaecat cupidatat non proident,
-sunt in culpa qui officia deserunt mollit anim id est laborum.
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-ut labore et dolore magna aliqua. Ut enim ad minim
-veniam, quis nostrud exercitation ullamco laboris nisi ut
-aliquip ex ea commodo consequat. Duis aute irure dolor
-in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-Excepteur sint occaecat cupidatat non proident,
-[D3Pseudocode className:"d3-component" newPseudocode:newPseudocode state:state i:i k:k j:j/]
+[d3Pseudocode state:step /]
 sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
 ut labore et dolore magna aliqua. Ut enim ad minim
 veniam, quis nostrud exercitation ullamco laboris nisi ut
