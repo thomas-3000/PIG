@@ -1,5 +1,10 @@
 # PIG
 
+##Pseudcode geändert 
+Habe den Code, der in Pseudocode.js steht auch verändert. Davor war ja der aus dem Cormen
+drin. Der ist aber nicht verständlich genug. Guckt mal was für Vorschläge ihr habt um den noch
+verständlicher zu machen. 
+
 ## Alle Vis sind jetzt drin
 Ducs Netzwerk heißt jetzt Network2 und der modifizierte FW, den nur Ducs Netzwerk verwendet heißt FloydWarschall2
 
