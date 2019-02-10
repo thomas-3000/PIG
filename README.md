@@ -1,11 +1,7 @@
 # PIG
 
-## 
-Duc, dein FLoydWarshall gibt bei getAllMatrices nicht die initiale Matrix mit, wenn ich das richtig sehe
-
-## Bug
-Duc, dein FloydWarshall gibt falsche Sachen aus. Vergleiche mal deine Matrizen mit denen im Cormen. 
-
+## Alle Vis sind jetzt drin
+Ducs Netzwerk heißt jetzt Network2 und der modifizierte FW, den nur Ducs Netzwerk verwendet heißt FloydWarschall2
 
 ## Klassen aufrufen in d3 klassen
 Es ist möglich Ducs Klassen aufzurufen. Nach 3 Tagen intensiver Recherche habe ich 
