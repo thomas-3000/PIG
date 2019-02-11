@@ -417,10 +417,19 @@ force.on("tick", function(){
 
 
 
-        edgelabels.attr("x", function(d, i) {
-        var pathLength = d3.select("#linkId_" + i).node().getTotalLength();
-
-        d.point = d3.select("#linkId_" + i).node().getPointAtLength(pathLength / (5/3));
+      edgelabels.attr("x", function(d, i) {
+        // diese Zeile macht beim change vis ärger
+        // weil d3.select(...) null wird.
+        try{
+          var pathLength = d3.select("#linkId_" + i).node().getTotalLength();
+        }
+        catch(TypeError){
+        }
+        try{
+          d.point = d3.select("#linkId_" + i).node().getPointAtLength(pathLength / (5/3));
+        }
+        catch(TypeError){
+        }
         return d.point.x;
       })
       .attr("y", function(d) {
@@ -431,9 +440,13 @@ force.on("tick", function(){
     });
 
      link_label_shadow.attr("cx", function(d, i) {
+        try{
         var pathLength = d3.select("#linkId_" + i).node().getTotalLength();
         d.point = d3.select("#linkId_" + i).node().getPointAtLength(pathLength / (5/3));
         return d.point.x;
+        }
+        catch(TypeError){
+        }
       })
       .attr("cy", function(d) {
         return d.point.y;

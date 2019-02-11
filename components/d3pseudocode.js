@@ -22,7 +22,7 @@ const xOffset = 40;
 const yMarkOffset = 25;
 const yDistance = 33;
 const xDistance = 45;
-const indent = 15;
+const indent = 20;
 
 function MatrixToList(matrix){
 	var data = [];
@@ -162,33 +162,33 @@ class D3Pseudocode extends D3Component {
 							.html("D = initiale Matrix");
 
 			PseudocodeGroup.append("foreignObject")
-			            	.attr("x",xDistance)
+			            .attr("x",xDistance)
 					        .attr("y",yMarkOffset + 2*yDistance-18)
 									.attr("width",300)
 									.attr("height",30)
-					        .attr("class", "textzeile")
+					        .attr("class", "k")
 									.append("xhtml:div")
 							.style("font-size", "16px")
-							.html("<b> <font color=\"green\">for</font></b> (Vergleich <b> <font color=\"blue\">k</font></b> in 1 to dim)");
+							.html("<b><font color=\"green\">for</font></b> (Vergleich <b><font color=\"blue\">k</font></b> in 1 to dim)&emsp;&emsp;&emsp;&emsp; <font color=\"red\">k = 0</font>");
 
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance+indent)
 					        .attr("y",yMarkOffset + 3*yDistance-18)
 									.attr("width",300)
 									.attr("height",30)
-					        .attr("class", "textzeile")
+					        .attr("class", "i")
 									.append("xhtml:div")
 							.style("font-size", "16px")
-							.html("<b> <font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 1 to dim)");
+							.html("<b><font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 1 to dim)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">i = 0</font>");
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance+2*indent)
 					        .attr("y",yMarkOffset + 4*yDistance-18)
 									.attr("width",300)
 									.attr("height",30)
-					        .attr("class", "textzeile")
+					        .attr("class", "j")
 									.append("xhtml:div")
 							.style("font-size", "16px")
-							.html("<b> <font color=\"green\">for</font></b> (Zeile <b> <font color=\"blue\">j</font></b> in 1 to dim)");
+							.html("<b><font color=\"green\">for</font></b> (Zeile <b> <font color=\"blue\">j</font></b> in 1 to dim)&emsp;&emsp;&emsp;&emsp; <font color=\"red\">j = 0</font>");
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance+3*indent)
 					        .attr("y", yMarkOffset + 5*yDistance-18)
@@ -431,12 +431,14 @@ class D3Pseudocode extends D3Component {
 			}
 		}
 
-		this.PseudocodeGroup.selectAll("text.vartext_i")
-							.text(i);
-		this.PseudocodeGroup.selectAll("text.vartext_j")
-							.text(j);
-		this.PseudocodeGroup.selectAll("text.vartext_k")
-							.text(k);
+		this.PseudocodeGroup.selectAll("foreignObject.k")
+					.html("<b><font color=\"green\">for</font></b> (Vergleich <b><font color=\"blue\">k</font></b> in 1 to dim)&emsp;&emsp;&emsp;&emsp; <font color=\"red\">k = "+k+"</font>");
+
+		this.PseudocodeGroup.selectAll("foreignObject.i")
+					.html("<b><font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 1 to dim)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">i = "+i+"</font>");
+
+		this.PseudocodeGroup.selectAll("foreignObject.j")
+					.html("<b><font color=\"green\">for</font></b> (Zeile <b> <font color=\"blue\">j</font></b> in 1 to dim)&emsp;&emsp;&emsp;&emsp; <font color=\"red\">j = "+j+"</fonts>");
 		this.PseudocodeGroup.selectAll("text.vartextmin1")
 							.text(min1);
 		this.PseudocodeGroup.selectAll("text.vartextmin2")

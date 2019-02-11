@@ -114,10 +114,10 @@ class D3Matrix extends D3Component {
 		// marks contains text to set around the matrix in order to see rows and cols
 		var marks = [];
 		for (var i=1;i<=dim;i++){
-			marks = marks.concat(i);
+			marks = marks.concat("0"+i.toString());
 		}
 		for (var i=1;i<=dim;i++){
-			marks = marks.concat(i);
+			marks = marks.concat("0"+i.toString());
 		}
     var position = [1,2];
 		var onCompPosition = [1,1];
@@ -301,6 +301,7 @@ class D3Matrix extends D3Component {
 			.attr("text-anchor","middle")
 			.attr("dominant-baseline","middle")
 			.attr("opacity",0)
+			.style("font-family","Futura")
 			.attr("font-weight", "bold");
 			//.attr("stroke-width","4");
   }
