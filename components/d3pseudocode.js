@@ -22,7 +22,7 @@ const xOffset = 40;
 const yMarkOffset = 25;
 const yDistance = 33;
 const xDistance = 45;
-const indent = 20;
+const indent = 10;
 
 function MatrixToList(matrix){
 	var data = [];
@@ -148,7 +148,8 @@ class D3Pseudocode extends D3Component {
             .append("xhtml:div")
 						.style("font-size", "16px")
 						.attr("opacity",1)
-							.html("and this is <b> <font color=\"red\"> bold text</font></b> mit <sub>subscript</sub>");
+							.html("<b> <font color=\"black\"> Floyd-Warshall-Algorithmus</font></b>");
+							//.html("and this is <b> <font color=\"red\"> bold text</font></b> mit <sub>subscript</sub>");
 								//<font color="red">dim = Anzahl Knoten</font>);
 
 			PseudocodeGroup.append("foreignObject")
@@ -164,51 +165,52 @@ class D3Pseudocode extends D3Component {
 			PseudocodeGroup.append("foreignObject")
 			            .attr("x",xDistance)
 					        .attr("y",yMarkOffset + 2*yDistance-18)
-									.attr("width",300)
+									.attr("width",350)
 									.attr("height",30)
 					        .attr("class", "k")
 									.append("xhtml:div")
 							.style("font-size", "16px")
-							.html("<b><font color=\"green\">for</font></b> (Vergleich <b><font color=\"blue\">k</font></b> in 1 to dim)&emsp;&emsp;&emsp;&emsp; <font color=\"red\">k = 0</font>");
+							.html("<b><font color=\"green\">for</font></b> (Vergleich <b><font color=\"blue\">k</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">k = 0</font>");
 
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance+indent)
 					        .attr("y",yMarkOffset + 3*yDistance-18)
-									.attr("width",300)
+									.attr("width",350)
 									.attr("height",30)
 					        .attr("class", "i")
 									.append("xhtml:div")
 							.style("font-size", "16px")
-							.html("<b><font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 1 to dim)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">i = 0</font>");
+							.html("<b><font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">i = 0</font>");
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance+2*indent)
 					        .attr("y",yMarkOffset + 4*yDistance-18)
-									.attr("width",300)
+									.attr("width",350)
 									.attr("height",30)
 					        .attr("class", "j")
 									.append("xhtml:div")
 							.style("font-size", "16px")
-							.html("<b><font color=\"green\">for</font></b> (Zeile <b> <font color=\"blue\">j</font></b> in 1 to dim)&emsp;&emsp;&emsp;&emsp; <font color=\"red\">j = 0</font>");
+							.html("<b><font color=\"green\">for</font></b> (Zeile <b> <font color=\"blue\">j</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">j = 0</font>");
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance+3*indent)
 					        .attr("y", yMarkOffset + 5*yDistance-18)
-									.attr("width",300)
+									.attr("width",350)
 									.attr("height",30)
 					        .attr("class", "textzeile")
 									.append("xhtml:div")
 							.style("font-size", "16px")
 							.style("white-space", "pre")
-							.html("neues D(<b><font color=\"blue\">i</font></b>,<b> <font color=\"blue\">j</font></b>) = min(altes D(<b> <font color=\"blue\">i</font></b>,<b> <font color=\"blue\">j</font></b>),");
+							.html("neues D(<b><font color=\"blue\">i</font></b>,<b><font color=\"blue\">j</font></b>) = min( altes D(<b><font color=\"blue\">i</font></b>,<b><font color=\"blue\">j</font></b>) , D(<b><font color=\"blue\">i</font></b>,<b><font color=\"blue\">k</font></b>)+D(<b><font color=\"blue\">k</font></b>,<b><font color=\"blue\">j</font></b>) )");
 			PseudocodeGroup.append("foreignObject")
-					        .attr("x",xDistance+13*indent)
+					        .attr("x",xDistance+0*indent)
 					        .attr("y", yMarkOffset + 6*yDistance-18)
-									.attr("width",300)
+									.attr("width",350)
 									.attr("height",30)
 					        .attr("class", "textzeile")
 									.append("xhtml:div")
 							.style("font-size", "16px")
 							.style("white-space", "pre")
-							.html("D(<b><font color=\"blue\">i</font></b>,<b><font color=\"blue\">k</font></b>)+D(<b><font color=\"blue\">k</font></b>,<b><font color=\"blue\">j</font></b>) )");
+							.html("return D");
+							//.html("D(<b><font color=\"blue\">i</font></b>,<b><font color=\"blue\">k</font></b>)+D(<b><font color=\"blue\">k</font></b>,<b><font color=\"blue\">j</font></b>) )");
 			// PseudocodeGroup.append("text")
 			// 				.attr("x",doffset+140)
 			// 				.attr("y",yMarkOffset + 5*yDistance)
