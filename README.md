@@ -1,6 +1,9 @@
 # PIG
 
 ##Pseudcode geändert 
+habe den Pseudocode auch nochmal leicht verändert. Gehe ich dann recht in der Annahme dass du die Anzeige der Minimumsermittlung parallel zum Durchklicken der Matrix lieber weglassen willst? weil es zu unüberischtlich und nicht hübsch genug ist? (zuviel Detail und clutter?
+
+##Pseudcode geändert 
 Habe den Code, der in Pseudocode.js steht auch verändert. Davor war ja der aus dem Cormen
 drin. Der ist aber nicht verständlich genug. Guckt mal was für Vorschläge ihr habt um den noch
 verständlicher zu machen. 
