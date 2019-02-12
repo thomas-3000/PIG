@@ -29,7 +29,7 @@ description:"my description" /]
   // mit React nicht hinbekommen hab
   [blankComponent /]
   // Ducs Graph
-  [Network /]
+  [Network2 /]
 
   [D3Matrix ignite:ignite i:i j:j k:k/]
   [Button onClick: `if(ignite==0){ignite=1;}else{ignite=0}`]Ignite![/Button]
@@ -112,25 +112,34 @@ Pics von wikipedia (public domain) [link text:"Graph" url:"https://de.wikipedia.
 ## Netzwerk
 Ein Netzwerk besteht aus einer Menge von eindeutigen Punkten, die Knoten genannt werden.
 
-[SVG src:"static/images/Nodes2.svg" /]
+[SVG src:"static/images/Nodes3.svg" /]
 [br/]
 Diese Knoten können durch sogenannte Kanten verbunden sein. Gilt die Kante zwischen zwei Knoten
 für beide Richtungen, so spricht man von einem ungerichteten Graphen
 //(Netzwerk wäre hier iwie falsch).
 
-[SVG src:"static/images/Undirected2.svg" /]
+[SVG src:"static/images/Undirected3.svg" /]
 
 Im Gegenteil kann auch eine Kante nur für eine Richtung gelten. Deshalb wird der folgende Graph auch
 gerichteter Graph genannt.
 
-[SVG src:"static/images/Directed3.svg" /]
+[SVG src:"static/images/Directed4.svg" /]
 
 Außerdem kann jede Kante ein Gewicht haben. Das nächste Bild zeigt einen vollständigen Graphen.
 
 [SVG src:"static/images/WithWeights.svg" /]
 
+Jedes Netzwerk ist definiert durch die Anzahl der Knoten und die Kanten, welche sie verbinden. Dadurch kann man
+zu jeden Netzwerk eine Matrix angeben, die die Verbindungen des Netzwerks abbildet. Diese Matrix wird [link text:"Adjazensmatrix" url:"https://de.wikipedia.org/wiki/Adjazenzmatrix" /] genannt. Der Matrixeintrag mit Spalte 1 und Zeile 2
+gibt dann das Gewicht der Verbindung von Knoten 1 zum Knoten 2 an. Gibt es keine Verbindung von 1 nach 2, dann wird das Gewicht als
+unendlich aufgefasst.
+[SmallD3Matrix /]
 
-[action onClick:`alert('👍 🎉');`]action links[/action]
+
+
+[Range min:0 max:100 step:1 value:step /]
+
+[Button onClick: `if (visnum==0){visnum=1}else{visnum=0}`] Change Vis [/Button]
 
 
 ###Der Floyd-Warshall-Algorithmus
@@ -153,4 +162,3 @@ ut labore et dolore magna aliqua. Ut enim ad minim
 veniam, quis nostrud exercitation ullamco laboris nisi ut
 aliquip ex ea commodo consequat. Duis aute irure dolor
 in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-
