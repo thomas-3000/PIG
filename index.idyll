@@ -136,7 +136,7 @@ Außerdem kann jede Kante ein Gewicht haben. Das nächste Bild zeigt einen volls
 ##Der Floyd-Warshall-Algorithmus
 
 Der Floyd-Warshall-Algorithmus nutzt das Prinzip der dynamischen Programmierung, um in einem gewichteten Graphen den kürzesten Pfad zwischen allen Paaren von Knoten zu berechnen.
-Der Algorithmus vergleicht für alle Knoten mit Index k zwischen 1 und N (der Anzahl der Knoten des Graphen), ob der bisher bekannte Pfad zwischen Knotenpaaren verkürzt wird wenn er über den Knoten k führt (und sich damit aus den 2 Teilpfaden von den Knoten zu k zusammensetzt) oder nicht.
+Für alle Knoten mit dem Index k zwischen 1 und N (N ist die Anzahl der Knoten des Graphen) wird überprüft, ob der bisher bekannte Pfad zwischen Knotenpaaren verkürzt wird wenn er über den Knoten k führt (und sich damit aus den 2 Teilpfaden von den Knoten zu k zusammensetzt) oder nicht.
 Dabei wird die Matrix für jeden Knoten k von 1 bis N aufgerufen, die Veränderungen werden gespeichert und dann als Grundlage für die nächste Iteration verwendet.
 Als Pseudocode sieht dies so aus:
 
