@@ -109,7 +109,7 @@ visnum = [Display value:visnum /]
 >[/Button]
 
 Pics von wikipedia (public domain) [link text:"Graph" url:"https://de.wikipedia.org/wiki/Graph_(Graphentheorie)" /]
-## Netzwerk
+## Was ist ein Netzwerk?
 Ein Netzwerk besteht aus einer Menge von eindeutigen Punkten, die Knoten genannt werden.
 
 [SVG src:"static/images/Nodes3.svg" /]
@@ -145,8 +145,18 @@ unendlich aufgefasst.
 ##Der Floyd-Warshall-Algorithmus
 
 Der Floyd-Warshall-Algorithmus nutzt das Prinzip der dynamischen Programmierung, um in einem gewichteten Graphen den kürzesten Pfad zwischen allen Paaren von Knoten zu berechnen.
-Für alle Knoten mit dem Index k zwischen 1 und N (N ist die Anzahl der Knoten des Graphen) wird überprüft, ob der bisher bekannte Pfad zwischen Knotenpaaren verkürzt wird wenn er über den Knoten k führt (und sich damit aus den 2 Teilpfaden von den Knoten zu k zusammensetzt) oder nicht.
+Für alle Knoten mit dem Index k zwischen 1 und N (N ist die Anzahl der Knoten des Graphen) wird überprüft, ob der bisher bekannte Pfad zwischen Knotenpaaren verkürzt wird wenn er
+über den Knoten k führt (und sich damit aus den 2 Teilpfaden von den Knoten zu k zusammensetzt) oder nicht.
 Dabei wird die Matrix für jeden Knoten k von 1 bis N aufgerufen, die Veränderungen werden gespeichert und dann als Grundlage für die nächste Iteration verwendet.
 Als Pseudocode sieht dies so aus:
 
 [D3Pseudocode className:"d3-component" newPseudocode:newPseudocode state:state i:i k:k j:j/]
+
+
+## Dynamische Programmierung
+Dynamische Programmierung ist eine Methode zum algorithmischen Lösen eines Optimierungsproblems, indem dieses in gleichartige Teilprobleme zerlegt wird und die Zwischenresultaten systematische gespeichert werden.
+Wie die Teile-und-Beherrsche-Methode löst die dynamische Programmierung Probleme, indem sie die Lösungen von Teilproblemen kombiniert. Diese Teilprobleme können sich dabei überlappen,
+d.h. wenn die Teilprobleme ihrerseits jeweils die gleichen Teil-Teil-probleme lösen müssen. Das DP löst jedes Teilproblem genau einmal und speichert dessen Lösung als Teilergebnis in einer Tabelle oder auch Matrix
+ab. Dadurch vermeiden wir den Aufwand, die Lösung eines Teilteilproblems jedes Mal wieder neu zu berechnen, wenn es uns wieder begegnet.
+
+Als einer der klassischen Vertreter der dynamischen Programmierung kann der Floyd-Warshall-Algorithmus das kürzeste-Pfad-Problem für alle Knotenpaare auf einen gerichteten Graphen lösen.
