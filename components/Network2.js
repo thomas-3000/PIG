@@ -5,7 +5,7 @@ const FitData = require('./FitData');
 const FloydWarshall2 = require('./FloydWarshall2');
 
 const width = 600;
-const height = 600;
+const height = 455;
 
 var weights = [
 	[0, 1, 3],

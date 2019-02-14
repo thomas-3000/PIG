@@ -8,12 +8,12 @@ const FloydWarshall = require('./FloydWarshall');
 var w = 400;
 var h = 400;
 
-const xOffset = 60;
-const yOffset = 60;
+const xOffset = 65;
+const yOffset = 65;
 const yDistance = 60;
 const xDistance = 60;
-const xMarkOffset = 20;
-const yMarkOffset = 20;
+const xMarkOffset = 25;
+const yMarkOffset = 25;
 const xCompOffset = xOffset-15;
 const yCompOffset = yOffset-15;
 const xCompDist = 30;

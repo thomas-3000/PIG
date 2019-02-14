@@ -8,13 +8,14 @@ class Fixed2 extends React.PureComponent {
         // Fixed2 drinsteht
         <div className="fixed">
           {this.props.children[1]}
+          {this.props.children[2]}
         </div>
       );
     }else{
       return(
         <div className="fixed">
-          {this.props.children[2]}
           {this.props.children[3]}
+          {this.props.children[4]}
         </div>
       )
     }

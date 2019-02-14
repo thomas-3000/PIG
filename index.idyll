@@ -5,7 +5,7 @@ description:"my description" /]
 [Header
   title:"KÜRZESTE WEGE IN NETZWERKEN"
   subtitle:"Am Beispiel des Floyd-Warshall Algorithmus"
-  author:"D,T,B"/]
+  author:"Duc, Thomas, Ben"/]
 //[div className:"fixed"]
 //[section className:"article-body"]
 [var name:"dim" value:5 /]
@@ -19,23 +19,20 @@ description:"my description" /]
 [var name:"visnum" value:0 /]
 
 
-[action onClick:`alert('👍 🎉');`]action links[/action]
+// [action onClick:`alert('👍 🎉');`]action links[/action]
 
+// ###Inhaltsverzeichnis
 
-# Pathfinding in Networks
-
-###Inhaltsverzeichnis
-
-[Button onClick: `if (visnum==0){visnum=1}else{visnum=0}`] Change Vis [/Button]
 [Fixed2 visnum:visnum]
   // wir brauchen hier ne componente, die nichts anzeigt, weil ich das anders
   // mit React nicht hinbekommen hab
   [blankComponent /]
   // Ducs Graph
+  [p]###Klicke zwei Knoten an[/p]
   [Network2 /]
 
   [D3Matrix ignite:ignite i:i j:j k:k/]
-  [Button onClick: `if(ignite==0){ignite=1;}else{ignite=0}`]Ignite![/Button]
+  [Button onClick: `if(ignite==0){ignite=1;}else{ignite=0}`]Start![/Button]
   // das sieht jetzt relativ scheiße aus, weil man nicht auf Sachen zugreifen,
   // welche in dem Ausdruck selber verändert werden
   // zB würde ich hier gerne oft auf "step" zugreifen, nachdem ich "step++" gemacht hab
@@ -71,47 +68,12 @@ description:"my description" /]
   >[/Button]
 [/Fixed2]
 
-k=[Display value:k /],
-j=[Display value:j /],
-i=[Display value:i /],
-step = [Display value:step /]
-visnum = [Display value:visnum /]
-[Button onClick: `if(ignite==0){ignite=1;}else{ignite=0}`]Ignite![/Button]
-// das sieht jetzt relativ scheiße aus, weil man nicht auf Sachen zugreifen,
-// welche in dem Ausdruck selber verändert werden
-// zB würde ich hier gerne oft auf "step" zugreifen, nachdem ich "step++" gemacht hab
-// Muss aber trotzdem immer "(step+1)" benutzen.
-[Button onClick: `
-    step--;
-    k = Math.floor( (step-1)/((dim-1)*(dim-1)))%(dim)+1;
-    j = (step-1)%(dim-1) +1;
-    // if j>=k: j++
-    if (((step-1)%(dim-1) +1)>=(Math.floor( (step-1)/((dim-1)*(dim-1)))%(dim)+1)){
-      j = (step-1)%(dim-1) +2;
-    };
-    i = Math.floor((step-1)/(dim-1))%(dim-1)+1;
-    // if i>=k: i++
-    if ((Math.floor((step-1)/(dim-1))%(dim-1)+1)>=(Math.floor( (step-1)/((dim-1)*(dim-1)))%(dim)+1)){
-      i = Math.floor((step-1)/(dim-1))%(dim-1)+2;
-    };
-    `]
-<[/Button] [Button onClick: `
-    step++;
-    k = Math.floor( (step+1)/((dim-1)*(dim-1)))%(dim)+1;
-    j = (step+1)%(dim-1) +1;
-    // if j>=k: j++
-    if (((step+1)%(dim-1) +1)>=(Math.floor( (step+1)/((dim-1)*(dim-1)))%(dim)+1)){
-      j = (step+1)%(dim-1) +2;
-    };
-    i = Math.floor((step+1)/(dim-1))%(dim-1)+1;
-    // if i>=k: i++
-    if ((Math.floor((step+1)/(dim-1))%(dim-1)+1)>=(Math.floor( (step+1)/((dim-1)*(dim-1)))%(dim)+1)){
-      i = Math.floor((step+1)/(dim-1))%(dim-1)+2;
-    };
-    `]
->[/Button]
+// k=[Display value:k /],
+// j=[Display value:j /],
+// i=[Display value:i /],
+// step = [Display value:step /]
 
-Pics von wikipedia (public domain) [link text:"Graph" url:"https://de.wikipedia.org/wiki/Graph_(Graphentheorie)" /]
+// Pics von wikipedia (public domain) [link text:"Graph" url:"https://de.wikipedia.org/wiki/Graph_(Graphentheorie)" /]
 ## Was ist ein Netzwerk?
 Ein Netzwerk besteht aus einer Menge von eindeutigen Punkten, die Knoten genannt werden.
 
@@ -138,11 +100,14 @@ gibt dann das Gewicht der Verbindung von Knoten 1 zum Knoten 2 an. Gibt es keine
 unendlich aufgefasst.
 [SmallD3Matrix /]
 
+## Dynamische Programmierung
+Dynamische Programmierung ist eine Methode zum algorithmischen Lösen eines Optimierungsproblems, indem dieses in gleichartige Teilprobleme zerlegt wird und die Zwischenresultaten systematische gespeichert werden.
+Wie die Teile-und-Beherrsche-Methode löst die dynamische Programmierung Probleme, indem sie die Lösungen von Teilproblemen kombiniert. Diese Teilprobleme können sich dabei überlappen,
+d.h. wenn die Teilprobleme ihrerseits jeweils die gleichen Teil-Teil-probleme lösen müssen. Das DP löst jedes Teilproblem genau einmal und speichert dessen Lösung als Teilergebnis in einer Tabelle oder auch Matrix
+ab. Dadurch vermeiden wir den Aufwand, die Lösung eines Teilteilproblems jedes Mal wieder neu zu berechnen, wenn es uns wieder begegnet.
 
+Als einer der klassischen Vertreter der dynamischen Programmierung kann der Floyd-Warshall-Algorithmus das kürzeste-Pfad-Problem für alle Knotenpaare auf einen gerichteten Graphen lösen.
 
-[Range min:0 max:100 step:1 value:step /]
-
-[Button onClick: `if (visnum==0){visnum=1}else{visnum=0}`] Change Vis [/Button]
 
 
 ##Der Floyd-Warshall-Algorithmus
@@ -151,15 +116,17 @@ Der Floyd-Warshall-Algorithmus nutzt das Prinzip der dynamischen Programmierung,
 Für alle Knoten mit dem Index k zwischen 1 und N (N ist die Anzahl der Knoten des Graphen) wird überprüft, ob der bisher bekannte Pfad zwischen Knotenpaaren verkürzt wird wenn er
 über den Knoten k führt (und sich damit aus den 2 Teilpfaden von den Knoten zu k zusammensetzt) oder nicht.
 Dabei wird die Matrix für jeden Knoten k von 1 bis N aufgerufen, die Veränderungen werden gespeichert und dann als Grundlage für die nächste Iteration verwendet.
+Um die Matrix des Netzwerks parallel zum Pseudocode zu sehen, bitte drücke [action onClick:`if(visnum==0){visnum=1}else{visnum=0};`]hier[/action].
+
 Als Pseudocode sieht dies so aus:
+
 
 [D3Pseudocode className:"d3-component" newPseudocode:newPseudocode state:state i:i k:k j:j/]
 
 
-## Dynamische Programmierung
-Dynamische Programmierung ist eine Methode zum algorithmischen Lösen eines Optimierungsproblems, indem dieses in gleichartige Teilprobleme zerlegt wird und die Zwischenresultaten systematische gespeichert werden.
-Wie die Teile-und-Beherrsche-Methode löst die dynamische Programmierung Probleme, indem sie die Lösungen von Teilproblemen kombiniert. Diese Teilprobleme können sich dabei überlappen,
-d.h. wenn die Teilprobleme ihrerseits jeweils die gleichen Teil-Teil-probleme lösen müssen. Das DP löst jedes Teilproblem genau einmal und speichert dessen Lösung als Teilergebnis in einer Tabelle oder auch Matrix
-ab. Dadurch vermeiden wir den Aufwand, die Lösung eines Teilteilproblems jedes Mal wieder neu zu berechnen, wenn es uns wieder begegnet.
 
-Als einer der klassischen Vertreter der dynamischen Programmierung kann der Floyd-Warshall-Algorithmus das kürzeste-Pfad-Problem für alle Knotenpaare auf einen gerichteten Graphen lösen.
+## Resultat des Algorithmus
+Die ursprüngliche Matrix sah so aus:
+[D3Matrix /]
+Die finale Matrix sieht nun so aus:
+[D3FinalMatrix ignite:0 i:4 j:4 k:5/]

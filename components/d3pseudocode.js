@@ -4,7 +4,7 @@ const d3 = require('d3');
 const FloydWarshall = require('./FloydWarshall');
 
 var w = 529;
-var h = 264;
+var h = 240;
 const dim = 5;
 var highlightline=1;
 var n = 5;
@@ -113,7 +113,7 @@ class D3Pseudocode extends D3Component {
 		var PseudocodeGroup = this.PseudocodeGroup = canvas.append("g");
 
 		var marks = [];
-		for (var i=1;i<=7;i++){
+		for (var i=1;i<=6;i++){
 			marks = marks.concat("0"+i.toString());
 		}
 		PseudocodeGroup.selectAll("text.marks")
@@ -124,7 +124,7 @@ class D3Pseudocode extends D3Component {
 			.attr("class","marks")
 			.attr("x",xMarkOffset)
 			.attr("y", function(d,i){
-				return (yMarkOffset + i*yDistance)
+				return (yMarkOffset + i*yDistance+33)
 			})
 			.attr("fill","blue")
 			.style("font-family","Futura")
@@ -434,13 +434,13 @@ class D3Pseudocode extends D3Component {
 		}
 
 		this.PseudocodeGroup.selectAll("foreignObject.k")
-					.html("<b><font color=\"green\">for</font></b> (Vergleich <b><font color=\"blue\">k</font></b> in 1 to dim)&emsp;&emsp;&emsp;&emsp; <font color=\"red\">k = "+k+"</font>");
+					.html("<b><font color=\"green\">for</font></b> (Vergleich <b><font color=\"blue\">k</font></b> in 1 to N)&emsp;&emsp;&emsp;&emsp; <font color=\"red\">k = "+k+"</font>");
 
 		this.PseudocodeGroup.selectAll("foreignObject.i")
-					.html("<b><font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 1 to dim)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">i = "+i+"</font>");
+					.html("<b><font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">i = "+i+"</font>");
 
 		this.PseudocodeGroup.selectAll("foreignObject.j")
-					.html("<b><font color=\"green\">for</font></b> (Zeile <b> <font color=\"blue\">j</font></b> in 1 to dim)&emsp;&emsp;&emsp;&emsp; <font color=\"red\">j = "+j+"</fonts>");
+					.html("<b><font color=\"green\">for</font></b> (Zeile <b> <font color=\"blue\">j</font></b> in 1 to N)&emsp;&emsp;&emsp;&emsp; <font color=\"red\">j = "+j+"</fonts>");
 		this.PseudocodeGroup.selectAll("text.vartextmin1")
 							.text(min1);
 		this.PseudocodeGroup.selectAll("text.vartextmin2")
