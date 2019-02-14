@@ -19,6 +19,9 @@ description:"my description" /]
 [var name:"visnum" value:0 /]
 
 
+[action onClick:`alert('👍 🎉');`]action links[/action]
+
+
 # Pathfinding in Networks
 
 ###Inhaltsverzeichnis

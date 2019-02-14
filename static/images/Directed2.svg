@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.0"
+   height="122"
+   width="121"
+   id="svg2">
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs5" />
+  <g
+     transform="matrix(0.44384356,0,0,0.44384356,6.0195552,17.003331)"
+     id="g2379">
+    <g
+       id="g2367">
+      <g
+         id="g2363">
+        <path
+           style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:4.99999905;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="M 53.918417,30.25 H 182.96968"
+           id="path2329" />
+        <path
+           style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="M 196.87444,30.530121 175.42457,18.180403 v 24.733811 z"
+           id="path2335" />
+      </g>
+      <g
+         id="g2359">
+        <path
+           id="use2331"
+           d="M 49.228763,61.218153 113.65969,172.81573"
+           style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:4.99999762;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <use
+           x="0"
+           y="0"
+           xlink:href="#path2335"
+           id="use2343"
+           transform="rotate(-120.00001,124.63107,84.398383)"
+           width="250"
+           height="225" />
+      </g>
+      <g
+         id="g2354">
+        <path
+           id="use2333"
+           d="M 143.45526,161.53001 201.79466,60.483252"
+           style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:4.99999714;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <use
+           x="0"
+           y="0"
+           xlink:href="#path2335"
+           id="use2345"
+           transform="rotate(-59.999988,218.62571,29.701547)"
+           width="250"
+           height="225" />
+        <use
+           x="0"
+           y="0"
+           xlink:href="#path2335"
+           id="use2347"
+           transform="rotate(120.00001,125.53083,84.408825)"
+           width="250"
+           height="225" />
+      </g>
+    </g>
+    <g
+       id="g2349">
+      <circle
+         r="23"
+         cy="200"
+         cx="35"
+         style="fill:#007fff;fill-opacity:1;fill-rule:evenodd;stroke:#000070;stroke-width:4.46856308;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path2317"
+         transform="matrix(0.839196,0,0,0.839196,2.628141,-137.8392)" />
+      <use
+         height="225"
+         width="250"
+         transform="translate(186)"
+         id="use2325"
+         xlink:href="#path2317"
+         y="0"
+         x="0" />
+      <use
+         height="225"
+         width="250"
+         transform="translate(93,161)"
+         id="use2327"
+         xlink:href="#path2317"
+         y="0"
+         x="0" />
+    </g>
+  </g>
+</svg>
