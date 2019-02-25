@@ -72,8 +72,9 @@ p {
   --color2: #74a9cf;
   --color3: #2b8cbe;
   --color4: #034e7d;
-  --color5: #000C42;
+  --color5: #000C43;
   --color6: rgb(227,74,51);
+  --color7: #000000;
 }
 .pscrahmen {
   color: var(--color0);
@@ -97,7 +98,7 @@ p {
   stroke: var(--color2);
 }
 .onComparator{
-  fill: var(--color5);
+  fill: var(--color4);
   r: 30;
 }
 

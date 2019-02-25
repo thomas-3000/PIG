@@ -1,7 +1,7 @@
 # PIG
 
 ##TODO
-- ich würde gern auf die kritik eingehen und das linking zwischen den Visualisierungen verbessern. Vor allem den aktuellen Matrixeintrag im pseudocode und der matrix gleich gestalten. 
+- ich würde gern auf die kritik eingehen und das linking zwischen den Visualisierungen verbessern. Vor allem den aktuellen Matrixeintrag im pseudocode und der matrix gleich gestalten. Hab die Idee den aktuellen Beitrag weiß auf hellem Grund zu machen. Sowohl in der matrix, als auch im pseudocode.
 
 ##Pseudcode geändert
 habe den Pseudocode auch nochmal leicht verändert. Gehe ich dann recht in der Annahme dass du die Anzeige der Minimumsermittlung parallel zum Durchklicken der Matrix lieber weglassen willst? weil es zu unüberischtlich und nicht hübsch genug ist? (zuviel Detail und clutter?

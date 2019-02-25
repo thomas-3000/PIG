@@ -15,7 +15,7 @@ var ijoffset=w/6.2;
 var koffset=w/6.2;
 var varoffset=325;
 var doffset=68;
-
+const pseudocodeSize = "22px";
 
 const xMarkOffset = 20;
 const xOffset = 40;
@@ -137,16 +137,16 @@ class D3Pseudocode extends D3Component {
 			// 		 		.attr("x",xDistance)
 			// 		        .attr("y",28)
 			// 		        .attr("class", "textzeile")
-			// 				.style("font-size", "16px")
+			// 				.style("font-size", "pseudocodeSize")
 			// 				.text("Floyd-Warshall(W)");
 
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance)
 					        .attr("y",yMarkOffset-18)
-									.attr("width",300)
+									.attr("width",450)
 									.attr("height",30)
             .append("xhtml:div")
-						.style("font-size", "16px")
+						.style("font-size", pseudocodeSize)
 						.attr("opacity",1)
 							.html("<b> <font color=\"black\"> Floyd-Warshall-Algorithmus</font></b>");
 							//.html("and this is <b> <font color=\"red\"> bold text</font></b> mit <sub>subscript</sub>");
@@ -155,59 +155,59 @@ class D3Pseudocode extends D3Component {
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance)
 					        .attr("y",yMarkOffset + yDistance-18)
-									.attr("width",150)
+									.attr("width",450)
 									.attr("height",30)
 					        .attr("class", "textzeile")
 									.append("xhtml:div")
-							.style("font-size", "16px")
+							.style("font-size", pseudocodeSize)
 							.html("D = initiale Matrix");
 
 			PseudocodeGroup.append("foreignObject")
 			            .attr("x",xDistance)
 					        .attr("y",yMarkOffset + 2*yDistance-18)
-									.attr("width",350)
+									.attr("width",450)
 									.attr("height",30)
 					        .attr("class", "k")
 									.append("xhtml:div")
-							.style("font-size", "16px")
+							.style("font-size", pseudocodeSize)
 							.html("<b><font color=\"green\">for</font></b> (Vergleich <b><font color=\"blue\">k</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">k = 0</font>");
 
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance+indent)
 					        .attr("y",yMarkOffset + 3*yDistance-18)
-									.attr("width",350)
+									.attr("width",450)
 									.attr("height",30)
 					        .attr("class", "i")
 									.append("xhtml:div")
-							.style("font-size", "16px")
+							.style("font-size", pseudocodeSize)
 							.html("<b><font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">i = 0</font>");
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance+2*indent)
 					        .attr("y",yMarkOffset + 4*yDistance-18)
-									.attr("width",350)
+									.attr("width",450)
 									.attr("height",30)
 					        .attr("class", "j")
 									.append("xhtml:div")
-							.style("font-size", "16px")
+							.style("font-size", pseudocodeSize)
 							.html("<b><font color=\"green\">for</font></b> (Zeile <b> <font color=\"blue\">j</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">j = 0</font>");
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance+3*indent)
 					        .attr("y", yMarkOffset + 5*yDistance-18)
-									.attr("width",350)
+									.attr("width",450)
 									.attr("height",30)
 					        .attr("class", "textzeile")
 									.append("xhtml:div")
-							.style("font-size", "16px")
+							.style("font-size", pseudocodeSize)
 							.style("white-space", "pre")
 							.html("neues D(<b><font color=\"blue\">i</font></b>,<b><font color=\"blue\">j</font></b>) = min( altes D(<b><font color=\"blue\">i</font></b>,<b><font color=\"blue\">j</font></b>) , D(<b><font color=\"blue\">i</font></b>,<b><font color=\"blue\">k</font></b>)+D(<b><font color=\"blue\">k</font></b>,<b><font color=\"blue\">j</font></b>) )");
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance+0*indent)
 					        .attr("y", yMarkOffset + 6*yDistance-18)
-									.attr("width",350)
+									.attr("width",450)
 									.attr("height",30)
 					        .attr("class", "textzeile")
 									.append("xhtml:div")
-							.style("font-size", "16px")
+							.style("font-size", pseudocodeSize)
 							.style("white-space", "pre")
 							.html("return D");
 							//.html("D(<b><font color=\"blue\">i</font></b>,<b><font color=\"blue\">k</font></b>)+D(<b><font color=\"blue\">k</font></b>,<b><font color=\"blue\">j</font></b>) )");
@@ -434,13 +434,17 @@ class D3Pseudocode extends D3Component {
 		}
 
 		this.PseudocodeGroup.selectAll("foreignObject.k")
-					.html("<b><font color=\"green\">for</font></b> (Vergleich <b><font color=\"blue\">k</font></b> in 1 to N)&emsp;&emsp;&emsp;&emsp; <font color=\"red\">k = "+k+"</font>");
+					.style("font-size", pseudocodeSize)
+					.html("<b><font color=\"green\">for</font></b> (Vergleich <b><font color=\"blue\">k</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">k = "+k+"</font>")
 
 		this.PseudocodeGroup.selectAll("foreignObject.i")
-					.html("<b><font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">i = "+i+"</font>");
+					.html("<b><font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">i = "+i+"</font>")
+					.style("font-size", pseudocodeSize)
 
 		this.PseudocodeGroup.selectAll("foreignObject.j")
-					.html("<b><font color=\"green\">for</font></b> (Zeile <b> <font color=\"blue\">j</font></b> in 1 to N)&emsp;&emsp;&emsp;&emsp; <font color=\"red\">j = "+j+"</fonts>");
+					.html("<b><font color=\"green\">for</font></b> (Zeile <b> <font color=\"blue\">j</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">j = "+j+"</fonts>")
+					.style("font-size", pseudocodeSize)
+
 		this.PseudocodeGroup.selectAll("text.vartextmin1")
 							.text(min1);
 		this.PseudocodeGroup.selectAll("text.vartextmin2")
