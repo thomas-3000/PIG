@@ -1,19 +1,19 @@
 # PIG
 
-##Pseudcode geändert 
-habe den Pseudocode auch nochmal leicht verändert. Gehe ich dann recht in der Annahme dass du die Anzeige der Minimumsermittlung parallel zum Durchklicken der Matrix lieber weglassen willst? weil es zu unüberischtlich und nicht hübsch genug ist? (zuviel Detail und clutter?
+##TODO
+- ich würde gern auf die kritik eingehen und das linking zwischen den Visualisierungen verbessern. Vor allem den aktuellen Matrixeintrag im pseudocode und der matrix gleich gestalten. 
 
-##Pseudcode geändert 
-Habe den Code, der in Pseudocode.js steht auch verändert. Davor war ja der aus dem Cormen
-drin. Der ist aber nicht verständlich genug. Guckt mal was für Vorschläge ihr habt um den noch
-verständlicher zu machen. 
+##Pseudcode geändert
+habe den Pseudocode auch nochmal leicht verändert. Gehe ich dann recht in der Annahme dass du die Anzeige der Minimumsermittlung parallel zum Durchklicken der Matrix lieber weglassen willst? weil es zu unüberischtlich und nicht hübsch genug ist? (zuviel Detail und clutter?
+	Ne, hab ich nur nicht wieder eingebaut. sollten wir haben.
+
 
 ## Alle Vis sind jetzt drin
 Ducs Netzwerk heißt jetzt Network2 und der modifizierte FW, den nur Ducs Netzwerk verwendet heißt FloydWarschall2
 
 ## Klassen aufrufen in d3 klassen
-Es ist möglich Ducs Klassen aufzurufen. Nach 3 Tagen intensiver Recherche habe ich 
-herausgefunden, dass mein Aufruf falsch war und der nicht richtig abgefangen wurde (!). 
+Es ist möglich Ducs Klassen aufzurufen. Nach 3 Tagen intensiver Recherche habe ich
+herausgefunden, dass mein Aufruf falsch war und der nicht richtig abgefangen wurde (!).
 Bei mir sieht das jetzt so aus:
 
 const FloydWarshall = require('./FloydWarshall');
@@ -33,7 +33,7 @@ class D3Matrix extends D3Component {
 			var numVertices = 5;
 			var fw = new FloydWarshall(weights, numVertices);
 
-Dabei liegt die Datei FloydWarshall.js im gleichen Ordner wie meine aufrufende Datei. 
+Dabei liegt die Datei FloydWarshall.js im gleichen Ordner wie meine aufrufende Datei.
 
 
 Thomas:
