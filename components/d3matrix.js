@@ -161,7 +161,6 @@ class D3Matrix extends D3Component {
 			.attr("rx",20)
 			.attr("width",dim*xDistance+yOffset/2)
 			.attr("height",30)
-			.attr("fill","yellow")
 			.attr("opacity",0);
 
 		matrixGroup.selectAll("rect.verticalHighlight")
@@ -176,7 +175,6 @@ class D3Matrix extends D3Component {
 			.attr("rx",20)
 			.attr("width",30)
 			.attr("height",dim*xDistance+xOffset/2)
-			.attr("fill","yellow")
 			.attr("opacity",0);
 
 		matrixGroup.selectAll("line.vertOnComparator")
@@ -189,7 +187,6 @@ class D3Matrix extends D3Component {
 			.attr("x2",function(d,i) {return xCompOffset+i*xCompDist;})
 			.attr("y2",rectDist +5 + yOffset)
 			.attr("stroke-width",2)
-			.attr("stroke","red")
 			.attr("opacity",0);
 
 		matrixGroup.selectAll("line.horizOnComparator")
@@ -202,7 +199,6 @@ class D3Matrix extends D3Component {
 			.attr("y2",function(d,i) {return yCompOffset+i*yCompDist;})
 			.attr("x2",rectDist +5 + xOffset)
 			.attr("stroke-width",2)
-			.attr("stroke","red")
 			.attr("opacity",0);
 
 		matrixGroup.selectAll("line.closeVertOnComparator")
@@ -215,7 +211,6 @@ class D3Matrix extends D3Component {
 			.attr("x1", xCompOffset)
 			.attr("x2", xCompOffset+xCompDist)
 			.attr("stroke-width", 2)
-			.attr("stroke","red")
 			.attr("opacity",0);
 
 		matrixGroup.selectAll("line.closeHorizOnComparator")
@@ -228,7 +223,6 @@ class D3Matrix extends D3Component {
 			.attr("y1", yCompOffset)
 			.attr("y2", yCompOffset+yCompDist)
 			.attr("stroke-width", 2)
-			.attr("stroke","red")
 			.attr("opacity",0);
 
 
@@ -240,7 +234,6 @@ class D3Matrix extends D3Component {
 			.attr("cx",xCompOffset+0.5*xCompDist)
 			.attr("cy",yCompOffset+0.5*yCompDist)
 			.attr("r",15)
-			.attr("fill","green")
 			.attr("opacity",0);
 
 		//	for (var x=0;x<dim;x++){

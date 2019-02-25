@@ -65,26 +65,40 @@ p {
   color: firebrick;
 }
 
+
+:root{
+  --color0: #f1eef6;
+  --color1: #bdc9e1;
+  --color2: #74a9cf;
+  --color3: #2b8cbe;
+  --color4: #034e7d;
+  --color5: #000C42;
+  --color6: rgb(227,74,51);
+}
 .pscrahmen {
-  color: rgb(222,235,247);
+  color: var(--color0);
 }
-
-.color0 {
-  color: rgb(222,235,247);
-  border-bottom: 1px dashed rgb(222,235,247);
+.horizontalHighlight {
+  fill: var(--color1);
 }
-.color1 {
-  color: rgb(158,202,225);
-  border-bottom: 1px dashed rgb(158,202,225);
+.verticalHighlight {
+  fill: var(--color1);
 }
-.color2 {
-  color: rgb(49,130,189);
-  border-bottom: 1px dashed rgb(49,130,189);
-
+.vertOnComparator{
+  stroke: var(--color2);
 }
-.color3 {
-  color: rgb(227,74,51);
-  border-bottom: 1px dashed rgb(227,74,51);
+.closeVertOnComparator{
+  stroke: var(--color2);
+}
+.horizOnComparator{
+  stroke: var(--color2);
+}
+.closeHorizOnComparator{
+  stroke: var(--color2);
+}
+.onComparator{
+  fill: var(--color5);
+  r: 30;
 }
 
 
