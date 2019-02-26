@@ -444,6 +444,7 @@ class D3Matrix extends D3Component {
 			.duration(300)
 			.attr("cx",xCompOffset+0.5*xCompDist+colComp*xDistance)
 			.attr("cy",yCompOffset+0.5*yCompDist+rowComp*yDistance)
+			.attr("opacity",1)
 		// move highlighter
 		this.matrixGroup.selectAll("rect.verticalHighlight")
 			//.data()
@@ -481,6 +482,14 @@ class D3Matrix extends D3Component {
 		console.log("blend green:i",i,"k",k,(k-1)+(dim*(i-1)));
 		console.log(oldMatrix[i-1][j-1], newMatrix[i-1][j-1]);
 
+		this.matrixGroup.selectAll("text.elements").filter(function (d,n) {
+								return n === (j-1)+(dim*(i-1));
+							})
+			// .style("opacity", 0)
+			// .transition().duration(200)
+			// .style("opacity", 1)
+			.attr("fill","white")
+			.attr("font-size",30);
 		// animation if there is a change in the matrix
 		if (oldMatrix[i-1][j-1] != newMatrix[i-1][j-1]){
 			this.matrixGroup.selectAll("text.elements").filter(function (d,n) {
@@ -489,7 +498,7 @@ class D3Matrix extends D3Component {
 				.style("opacity", 0)
 				.transition().duration(200)
 				.style("opacity", 1)
-				.attr("fill","red")
+				.attr("fill","white")
 				.attr("font-size",35);
 
 			this.matrixGroup.selectAll("text.elements").filter(function(d,n){

@@ -4,7 +4,7 @@ const d3 = require('d3');
 const FloydWarshall = require('./FloydWarshall');
 
 var w = 529;
-var h = 240;
+var h = 280;
 const dim = 5;
 var highlightline=1;
 var n = 5;
@@ -111,9 +111,22 @@ class D3Pseudocode extends D3Component {
 		var data = MatrixToList(ducsToMatrix(Ducs));
 		//Gruppenvariable
 		var PseudocodeGroup = this.PseudocodeGroup = canvas.append("g");
+		var rectPos = [0,0];
+
+		PseudocodeGroup.selectAll("rectangle.pseudocodeBox")
+			.data(rectPos)
+			.enter()
+			.append("rect")
+			.attr("class", "pseudocodeBox")
+			.attr("width", w)
+			.attr("height", h)
+			.attr("rx",10)
+			.attr("x",0)
+			.attr("y",0)
+			.attr("fill","blue");
 
 		var marks = [];
-		for (var i=1;i<=6;i++){
+		for (var i=1;i<=7;i++){
 			marks = marks.concat("0"+i.toString());
 		}
 		PseudocodeGroup.selectAll("text.marks")
@@ -124,11 +137,11 @@ class D3Pseudocode extends D3Component {
 			.attr("class","marks")
 			.attr("x",xMarkOffset)
 			.attr("y", function(d,i){
-				return (yMarkOffset + i*yDistance+33)
+				return (yMarkOffset + i*yDistance+38)
 			})
 			.attr("fill","blue")
 			.style("font-family","Futura")
-			.style("font-size", "11px")
+			.style("font-size", "13px")
 			.attr("font-weight","bold");
 			//Highlightzeile
 
@@ -140,11 +153,20 @@ class D3Pseudocode extends D3Component {
 			// 				.style("font-size", "pseudocodeSize")
 			// 				.text("Floyd-Warshall(W)");
 
+			// Kreis unter aktuellem Eintrag
+			PseudocodeGroup.selectAll("circle")
+									.data([0])
+									.enter().append("circle")
+									.attr("class","belowCurrent")
+									.attr("cx",312)
+									.attr("cy",225)
+									.attr("r",12);
+
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance)
 					        .attr("y",yMarkOffset-18)
 									.attr("width",450)
-									.attr("height",30)
+									.attr("height",40)
             .append("xhtml:div")
 						.style("font-size", pseudocodeSize)
 						.attr("opacity",1)
@@ -181,6 +203,7 @@ class D3Pseudocode extends D3Component {
 									.append("xhtml:div")
 							.style("font-size", pseudocodeSize)
 							.html("<b><font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">i = 0</font>");
+
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance+2*indent)
 					        .attr("y",yMarkOffset + 4*yDistance-18)
@@ -190,6 +213,7 @@ class D3Pseudocode extends D3Component {
 									.append("xhtml:div")
 							.style("font-size", pseudocodeSize)
 							.html("<b><font color=\"green\">for</font></b> (Zeile <b> <font color=\"blue\">j</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">j = 0</font>");
+
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance+3*indent)
 					        .attr("y", yMarkOffset + 5*yDistance-18)
@@ -200,9 +224,21 @@ class D3Pseudocode extends D3Component {
 							.style("font-size", pseudocodeSize)
 							.style("white-space", "pre")
 							.html("neues D(<b><font color=\"blue\">i</font></b>,<b><font color=\"blue\">j</font></b>) = min( altes D(<b><font color=\"blue\">i</font></b>,<b><font color=\"blue\">j</font></b>) , D(<b><font color=\"blue\">i</font></b>,<b><font color=\"blue\">k</font></b>)+D(<b><font color=\"blue\">k</font></b>,<b><font color=\"blue\">j</font></b>) )");
+
+			PseudocodeGroup.append("foreignObject")
+					        .attr("x",xDistance+3*indent)
+					        .attr("y", yMarkOffset + 6*yDistance-18)
+									.attr("width",450)
+									.attr("height",30)
+					        .attr("class", "eintragsVergleich")
+									.append("xhtml:div")
+							.style("font-size", pseudocodeSize)
+							.style("white-space", "pre")
+							.html("neues D(<b><font color=\"blue\">i</font></b>,<b><font color=\"blue\">j</font></b>) = min(&emsp;&emsp; <font color=\"white\">0</font> &emsp;&emsp;,&nbsp;&nbsp;&nbsp; ∞ &nbsp;&nbsp;&nbsp;+ &nbsp;&nbsp;&nbsp;3 &nbsp;&nbsp;&nbsp;)");
+
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance+0*indent)
-					        .attr("y", yMarkOffset + 6*yDistance-18)
+					        .attr("y", yMarkOffset + 7*yDistance-18)
 									.attr("width",450)
 									.attr("height",30)
 					        .attr("class", "textzeile")
@@ -409,9 +445,12 @@ class D3Pseudocode extends D3Component {
 		//			.attr("y",(highlightline*33)); }
 		var oldMatrix = ducsToMatrix(fw.getAllMatrices()[k-1].matrix);
 		var oldList = MatrixToList(oldMatrix);
-		var min1 = oldList[(i-1)*5+j-1];
+		var currentEntry = oldList[(i-1)*5+j-1];
+		var min1 = currentEntry;
 		var min2 = oldList[(i-1)*5+k-1];
+		var compareIK = min2
 		var min3 = oldList[(k-1)*5+j-1];
+		var compareKJ = min3
 		//this.PseudocodeGroup.selectAll("text.vartextminl")
 		//					.text(oldList);
 		var min4;
@@ -444,6 +483,14 @@ class D3Pseudocode extends D3Component {
 		this.PseudocodeGroup.selectAll("foreignObject.j")
 					.html("<b><font color=\"green\">for</font></b> (Zeile <b> <font color=\"blue\">j</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">j = "+j+"</fonts>")
 					.style("font-size", pseudocodeSize)
+
+
+		this.PseudocodeGroup.selectAll("foreignObject.eintragsVergleich")
+					.html("neues D(<b><font color=\"blue\">i</font></b>,<b><font color=\"blue\">j</font></b>) = min( "+currentEntry+" , "+compareIK+"+"+compareKJ+")")
+					.style("font-size", pseudocodeSize);
+
+			console.log("HERE",currentEntry)
+
 
 		this.PseudocodeGroup.selectAll("text.vartextmin1")
 							.text(min1);

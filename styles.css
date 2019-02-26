@@ -32,8 +32,12 @@ h2 {
 p {
 }
 
-.d3-component {
+/* .d3-component {
   background-color: #DEDBDE;
+} */
+
+.pseudocodeBox {
+  fill:#DEDBDE;
 }
 
 .text.elements{
@@ -101,7 +105,9 @@ p {
   fill: var(--color4);
   r: 30;
 }
-
+.belowCurrent{
+  fill: var(--color4);
+}
 
 @media all and (max-width: 1000px) {
   /* put your css styles in here */
