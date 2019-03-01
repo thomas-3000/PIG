@@ -3,7 +3,6 @@ const D3Component = require('idyll-d3-component');
 const d3 = require('d3');
 const FitData = require('./FitData');
 const FloydWarshall2 = require('./FloydWarshall2');
-const Steps = require('./Steps');//++
 
 const width = 600;
 const height = 455;
@@ -26,21 +25,13 @@ var links = fitData.getlinkData();
 var nodes = fitData.getNodesData();
 
 const fw = new FloydWarshall2(weights, numVertices);
-const allSteps = new Steps(fw);//++
 
- var storeAllSteps = allSteps.getAllSteps();//++
  var offSetColor = "#D3D3D3";// grey
 
  var offSetColorNode = "#1E90FF";//blue
  var smallNodeSize = 10;
  var bigNodeSize = 20;
-
- var highlightColor = "#00cc44";//red
- var highlightColor2ndStart = "#ff5959";//green//++
- var intermediateColor = "#ff5959";//"#b39800";
- var intermediateColor_kj = "#00cc44";//"#FFD700";
- var nodeKcolor = "#FFD700";
- var egdeMultipleColor = "#000000";
+ var highlightColor = "#DC143C";//red
 
  var smallWidthEdge = 2;
  var bigWidthEdge = 3;
@@ -56,12 +47,8 @@ const allSteps = new Steps(fw);//++
  var initFontSizeEdgeLabel = "10px";
  var higlightedSizeEdgeLabel = "25px" ;
  var positionOfText_PathStr_Title_x = -50;
- var positionOfText_PathStr_Title_y = 400
+ var positionOfText_PathStr_Title_y = 400;
 
-
-
-  var infinity = '  kein Pfad';
-  
 
 class Network2 extends D3Component {
 	initialize(node,props){
@@ -71,20 +58,6 @@ class Network2 extends D3Component {
                                     .attr("height",height);
 
 		var radius = 10;
-
-      //New Code
-  var stepCounter = 0;
-  var ikj_startNode = null;
-  var ikj_destNode = null;
-  var k_destNode = null;
-  var currentColouredEdges_ikj = null;
-  var currentColouredLabel_ikj = null;
-  var currentColouredEdges_ikj_ik = null;
-  var currentColouredLabel_ikj_ik = null;
-  var currentColouredEdges_ikj_kj = null;
-  var currentColouredLabel_ikj_kj = null;
-  var currentKNode = null;
-    var colorEdgeMatrix = initMatrix(numVertices, 0);
 
 
 
@@ -111,30 +84,20 @@ class Network2 extends D3Component {
 var title = canvas.append("text")
    .attr("transform", "translate(100,0)")
    .attr("x", positionOfText_PathStr_Title_x)
-   .attr("y", positionOfText_PathStr_Title_y-50)
+   .attr("y", positionOfText_PathStr_Title_y)
    .style("font-size", "20px")
-   .style("fill", highlightColor)
    .attr("class", "title");
 
 //2.####################pathStr
 var pathStr = canvas.append("text")
    .attr("transform", "translate(100,0)")
    .attr("x", positionOfText_PathStr_Title_x)
-   .attr("y", positionOfText_PathStr_Title_y)
-   .style("font-size", "20px")
-   .style("fill", highlightColor2ndStart)
-   .attr("class", "title");
-
-var sum = canvas.append("text")
-   .attr("transform", "translate(100,0)")
-   .attr("x", positionOfText_PathStr_Title_x)
    .attr("y", positionOfText_PathStr_Title_y + 50)
    .style("font-size", "20px")
    .attr("class", "title");
 
-title.text("D(k,j) =  ");
-pathStr.text("D(i,k) = ");
-sum.text("Sum(i,k,j) = ");
+title.text("distance =  ");
+pathStr.text("path = ");
 
 
 //3.####################marker
@@ -224,24 +187,24 @@ function getEdgelabels(source, target, edgelabels){
  		var nameSource = d3.select(thisEdgelabels).datum().source.name;
 		var nameTarget = d3.select(thisEdgelabels).datum().target.name;
 
- 		//console.log("Label source:", source,"target", target, "nameSource", nameSource, "nameTarget", nameTarget);
- 		//console.log("thisEdgelabels", thisEdgelabels);
+ 		console.log("Label source:", source,"target", target, "nameSource", nameSource, "nameTarget", nameTarget);
+ 		console.log("thisEdgelabels", thisEdgelabels);
  		if(nameSource == source && nameTarget == target){
  			return thisEdgelabels;
  		}
  	}
  	return null;
  }
-//console.log("Path", getPath());
+console.log("Path", getPath());
 
 function getEdge(source, target){
- 	//console.log("Path2",  getPath());
+ 	console.log("Path2",  getPath());
 	var listOfAllPaths = path._groups[0];
-	//console.log('listOfAllPaths', listOfAllPaths, path._groups[0]);
+	console.log('listOfAllPaths', listOfAllPaths, path._groups[0]);
 	var len = listOfAllPaths.length;
 	for (var i = 0; i<len; i++){
 		var thisPath = listOfAllPaths[i];
-		//console.log('thisPath', thisPath);
+		console.log('thisPath', thisPath);
 		var nameSource = d3.select(thisPath).datum().source.name;
 		var nameTarget = d3.select(thisPath).datum().target.name;
 
@@ -266,22 +229,18 @@ function resizeSingleNode(thisNode, size){
 	        .attr("r", size);
 }
 
-function highlightSingleNode(thisNode, color, label){
+function highlightSingleNode(thisNode){
 	 d3.select(thisNode).select("text").transition()
         .duration(750)
         .attr("x", -3.5)
         .style("stroke", "#87CEFA")
         .style("stroke-width", ".5px")
-        .style("font", "20px sans-serif")
-        .text(function(d) {
-          var modifiedName = d.name +"   "+label;
-          return modifiedName;
-          });
+        .style("font", "20px sans-serif");
 
     	d3.select(thisNode).select("circle").transition()
         .duration(750)
         .attr("r", bigNodeSize)
-        .style("fill", color);
+        .style("fill", highlightColor);
 
 }
 
@@ -306,10 +265,7 @@ function resetSingleNode(thisNode){
 	        .style("stroke", "none")
 	        .style("fill", letterColor)
 	        .style("stroke", "none")
-	        .style("font", "10px sans-serif")
-          .text(function(d) {
-          return d.name;
-    });
+	        .style("font", "10px sans-serif");
 	thisNode = null;
 }
 
@@ -319,9 +275,6 @@ function resetColouredEdges(colouredEdges){
 		var thisEdge = colouredEdges[i];
 		thisEdge.style.stroke = offSetColor;
 		thisEdge.style.strokeWidth = smallWidthEdge;
-    var start = getEdgeStartName(thisEdge);
-    var dest = getEdgeDestName(thisEdge);
-    resetColorEdge(start, dest);
 	}
 	return [];
 }
@@ -341,35 +294,12 @@ function updateDisplayWeight(weight, pathWay){
 	pathStr.text("path =	"+pathWay.toString());
 }
 
-function updateDisplay_ikj(iNode, kNode, jNode, ikWeight, kjWeight) {
-    if(kjWeight != null){
-      title.text("D(" + kNode + "," + jNode  + ") = " + kjWeight);
-    }else{
-      title.text("D(" + kNode + "," + jNode  + ") = " + infinity);
-    }
-    if(ikWeight != null){
-      pathStr.text("D(" + iNode + "," + kNode + ") = " + ikWeight);
-    }else{
-      pathStr.text("D(" + iNode + "," + kNode + ") = " + infinity);
-    }
-    if(ikWeight!= null && kjWeight != null){
-      sum.text("Sum("+iNode+","+kNode+","+jNode+") = "+ (kjWeight+ikWeight));
-    }else{
-      sum.text("Sum("+iNode+","+kNode+","+jNode+") ="+ infinity);
-    }
-  }
-
 function resetDisplayWeight(){
 	title.text("distance =	");
 	pathStr.text("path =	");
 }
 
-function resetDisplayText(){
-    title.text("D(k,j) =  ");
-    pathStr.text("D(i,k) = ");
-}
-
-function highlightShortestPath(shortestPathArr, color){
+function highlightShortestPath(shortestPathArr){
  	var allEgdes = [];
  	if(shortestPathArr.length<2){
  		return allEgdes;
@@ -380,15 +310,7 @@ function highlightShortestPath(shortestPathArr, color){
  		var node1rst = shortestPathArr[i];
  		var node2nd = shortestPathArr[i+1];
  		var thisEdge = getEdge(node1rst, node2nd);
-
- 		if(checkIsColoredEdge(node1rst, node2nd)==true){
-        thisEdge.style.stroke = egdeMultipleColor;
-      }else{
-        thisEdge.style.stroke = color;
-      }
-      setColorEdge(node1rst, node2nd);
-
-
+ 		thisEdge.style.stroke = highlightColor;
  		thisEdge.style.strokeWidth = bigWidthEdge;
  		allEgdes.push(thisEdge);
  	}
@@ -532,187 +454,18 @@ force.on("tick", function(){
     });
 
 canvas.on("dblclick", function() {
-	var thisStep = storeAllSteps[stepCounter];
-    var ikWeight = null;
-    var kjWeight = null;
-    var k = thisStep[1];
-    var i = thisStep[2];
-    var j = thisStep[3];
-
-    if (k != currentKNode) {
-        if (k_destNode != null) {
-          resetSingleNode(k_destNode);
-          currentKNode=k;
-          k_destNode = getSelectedNode(k);
-        }
-      }
-
-    if (ikj_startNode != null) {
-      resetSingleNode(ikj_startNode);
-    }
-
-    if (ikj_destNode != null) {
-      resetSingleNode(ikj_destNode);
-    }
-
-    if (currentColouredEdges_ikj != null) {
-      currentColouredEdges_ikj = resetColouredEdges(currentColouredEdges_ikj);
-    }
-
-    if (currentColouredLabel_ikj != null) {
-      currentColouredLabel_ikj = resetColouredEdgeLabel(currentColouredLabel_ikj);
-    }
-
-    if (currentColouredEdges_ikj_ik != null) {
-      currentColouredEdges_ikj_ik = resetColouredEdges(currentColouredEdges_ikj_ik);
-    }
-
-    if (currentColouredLabel_ikj_ik != null) {
-      currentColouredLabel_ikj_ik = resetColouredEdgeLabel(currentColouredLabel_ikj_ik);
-    }
-
-    if (currentColouredEdges_ikj_kj != null) {
-      currentColouredEdges_ikj_kj = resetColouredEdges(currentColouredEdges_ikj_kj);
-    }
-
-    if (currentColouredLabel_ikj_kj != null) {
-      currentColouredLabel_ikj_kj = resetColouredEdgeLabel(currentColouredLabel_ikj_kj);
-    }
-
-    console.log(thisStep);
-    if (k != j && k != i && i!=j) {
-
-      var ikjPath = fw.findPathsOverVertexK(thisStep);
-      if (ikjPath.get_resultPath() != null) {
-        console.log("i: ", i, "| j: ", j);
-        ikj_startNode = getSelectedNode(i);
-        ikj_destNode = getSelectedNode(j);
-
-        if (k != i) {
-          console.log("I START", i," ",k);
-          console.log("ikj_startNode", ikj_startNode);
-          highlightSingleNode(ikj_startNode, highlightColor2ndStart,"Start");
-        }
-        if (k != j) {
-          highlightSingleNode(ikj_destNode, highlightColor,"Ziel");
-        }
-
-        if (ikjPath.get_ikPathWay() != null) {
-          var ikPath = ikjPath.get_ikPathWay();
-
-          currentColouredEdges_ikj_ik = highlightShortestPath(ikPath, intermediateColor);
-          currentColouredLabel_ikj_ik = highlightLabels(ikPath, intermediateColor);
-        }
-
-        if (ikjPath.get_ikPathWeight() != null) {
-          ikWeight = ikjPath.get_ikPathWeight();
-          // ikWeight = ikWeight.fontcolor(highlightColor);
-        } else {
-          ikWeight = null;
-        }
-
-        if (ikjPath.get_kjPathWay() != null) {
-          var kjPath = ikjPath.get_kjPathWay();
-          currentColouredEdges_ikj_kj = highlightShortestPath(kjPath, intermediateColor_kj);
-          currentColouredLabel_ikj_kj = highlightLabels(kjPath, intermediateColor_kj);
-        }
-
-        if (ikjPath.get_kjPathWeight() != null) {
-          kjWeight = ikjPath.get_kjPathWeight();
-          
-        } else {
-          kjWeight = null;
-        }
-
-        updateDisplay_ikj(i, k, j, ikWeight, kjWeight);
-        
-        // if (ikjPath.get_previousPathWay() != null) {
-        // var previousPath = ikjPath.get_previousPathWay();
-        // currentColouredEdges_ikj = highlightShortestPath_BOLT(previousPath, bigWidthEdge*1.5);
-        // //currentColouredLabel_ikj = highlightLabels(previousPath, highlightColor);
-        // }
-
-      }
-      if (k != currentKNode) {
-        if (k_destNode != null) {
-          resetSingleNode(k_destNode);
-        }
-        currentKNode = k;
-        k_destNode = getSelectedNode(k);
-        highlightSingleNode(k_destNode, nodeKcolor,"Station");
-      } else {
-        highlightSingleNode(k_destNode, nodeKcolor,"Station");
-      }
-
-    }
-
-    stepCounter = stepCounter + 1;
-
-  });
-
-function getSelectedNode(integerNum) {
-    var listAllNodes = node._groups[0];
-    var len = listAllNodes.length;
-    for (var i = 0; i < len; i++) {
-      var thisNode = listAllNodes[i];
-      var nodeName = d3.select(thisNode).datum().name;
-      if (nodeName == String(integerNum)) {
-        return thisNode;
-      }
-    }
-  }
-
-  function getEdgesOfPaht(pathWay) {
-    var allEdges = [];
-    for (var i = 0; i < pathWay.length - 1; i++) {
-      var start = pathWay[i];
-      var dest = pathWay[i + 1];
-      var edge = getEdge(start, dest, path);
-      allEdges.push(edge);
-    }
-    return allEdges;
-  }
-
-  function checkIsColoredEdge(start,dest){
-    if(colorEdgeMatrix[start][dest] == 1){
-      return true;
-    }
-    return false;
-  }
-  
-  function setColorEdge(start, dest){
-    colorEdgeMatrix[start][dest] = 1;
-  }
-  
-  function resetColorEdge(start, dest){
-    colorEdgeMatrix[start][dest] = 0;
-  }
-  
-  function initMatrix(size, nullValue){
-    var arr = [];
-    for (var i = 0; i < size; i++){
-      arr.push([]);
-      arr[i].push(new Array(size));
-      for(var j = 0; j<size; j++){
-        if(i!=j){
-          arr[i][j] = nullValue;
-        }else{
-        arr[i][j] = 0;
-        }
-      }
-    }
-    console.log('DONE MATRIX');
-    return arr;
-  }// end of initMatrix
-  
-  function getEdgeStartName(edge){
-    return d3.select(edge).datum().source.name;
-    
-  }
-  
-  function getEdgeDestName(edge){
-    return d3.select(edge).datum().target.name;
-  }
+	if(current2ndNode == null && current1rstNode == null){
+		return;
+	}
+    currentColouredEdges = resetColouredEdges(currentColouredEdges);
+    currentColouredLabel = resetColouredEdgeLabel(currentColouredLabel);
+    currentColouredNode = resetNodes(currentColouredNode);
+  	resetSingleNode(current2ndNode);
+    resetSingleNode(current1rstNode);
+    current1rstNode = null;
+    current2ndNode = null;
+    resetDisplayWeight();
+});
 
 //####################FUNCTIONS END
 }

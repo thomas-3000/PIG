@@ -1,3 +1,4 @@
+
 class Steps{
 	constructor(floydWarshall){
 		this.infinity = 1000;
@@ -39,3 +40,5 @@ class Steps{
 		return this.allSteps[i-1];
 	}
 }
+
+module.exports = Steps;

@@ -53,6 +53,10 @@ class KthMatrix{
 	getWeight(start, end){
 		return this.matrix[start][end];
 	}
+
+	getMatrix(){
+		return this.matrix;
+	}
 }// end of class
 
 
