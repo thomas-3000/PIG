@@ -96,16 +96,8 @@ class Network2 extends D3Component {
 				// CHANGED force center
 		    .force('center', d3.forceCenter(width / 2, height / 2));
 
-		// var force = d3.forceSimulation();
-    //     			//.size([w, h])
-		//simulation.force('link', d3.forceLink().links(links))
-		// force.nodes(d3.values(nodes))
-  	// 		//.links(links)
-  	// 		//.on("tick", tick)
-  	// 		//.linkDistance(400)
-  	// 		//.start();
-		console.log("NETWORK: nodes",nodes);
-		console.log("NETWORK: fnodes",force.nodes());
+		//console.log("NETWORK: nodes",nodes);
+		//console.log("NETWORK: fnodes",force.nodes());
 
 //1.####################title
 var title = canvas.append("text")
@@ -212,7 +204,7 @@ node.append("text")
     .attr("x", -3.5)
     .attr("dy", ".15em")
     .text(function(d) { return d.name; });
-node.on("click", click);
+//node.on("click", click);
 
   //####################FUNCTIONS
 
@@ -419,66 +411,6 @@ var name = d3.select(vertex).datum().name;
 console.log("Ducvertex", name);
 	return name;
 }
-
-
-//node.on("click", function() {
-function click(path){
-	if (current1rstNode == null){
-		current1rstNode = this;
-		console.log('current1rstNode ', this);
-	}else if( current2ndNode == null){
-		current2ndNode = this;
-		console.log('current2ndNode ', this);
-	}else if(this == current1rstNode && current2ndNode != null){// if click on the start vertex, it returns to old size, and the second vertex becomes the first
-		resetSingleNode(this);
-
-	    current1rstNode = current2ndNode;
-	    current2ndNode = null;
-
-	    currentColouredEdges = resetColouredEdges(currentColouredEdges);
-	    currentColouredLabel = resetColouredEdgeLabel(currentColouredLabel);
-	    currentColouredNode = resetNodes(currentColouredNode);
-	    return;
-
-	}else if(this == current2ndNode && current1rstNode != null){
-		resetSingleNode(this);
-
-	    currentColouredEdges = resetColouredEdges(currentColouredEdges);
-		currentColouredLabel = resetColouredEdgeLabel(currentColouredLabel);
-		currentColouredNode = resetNodes(currentColouredNode);
-	    return;
-	}
-	// swap the 2nd vertex by click
-	if(current2ndNode != null && current1rstNode != this){
-		resetSingleNode(current2ndNode);
-		current2ndNode = this;
-		currentColouredEdges = resetColouredEdges(currentColouredEdges);
-		currentColouredLabel = resetColouredEdgeLabel(currentColouredLabel);
-		currentColouredNode = resetNodes(currentColouredNode);
-	}
-
-
-	if(current1rstNode != null && current2ndNode != null){
-	console.log("here current1rstNode", current1rstNode, current2ndNode)
-		var node1rst = getVertexName(current1rstNode);
-		var node2nd = getVertexName(current2ndNode);
-
-		var shortestPath = fw.getSinglePath(parseInt(node1rst), parseInt(node2nd));
-		var distance = fw.getWeightPath(parseInt(node1rst), parseInt(node2nd));
-
-		currentColouredEdges = highlightShortestPath(shortestPath, path);
-		currentColouredLabel = highlightLabels(shortestPath);
-
-		updateDisplayWeight(distance,shortestPath);
-
-	}
-
-   highlightSingleNode(this);
-
-   console.log(this);
-   }
-//});
-
 
 force.on("tick", function(){
     	 path.attr("d", function(d) {
