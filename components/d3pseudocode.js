@@ -202,7 +202,7 @@ class D3Pseudocode extends D3Component {
 					        .attr("class", "i")
 									.append("xhtml:div")
 							.style("font-size", pseudocodeSize)
-							.html("<b><font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">i = 0</font>");
+							.html("<b><font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">i = 2</font>");
 
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance+2*indent)
@@ -212,7 +212,7 @@ class D3Pseudocode extends D3Component {
 					        .attr("class", "j")
 									.append("xhtml:div")
 							.style("font-size", pseudocodeSize)
-							.html("<b><font color=\"green\">for</font></b> (Zeile <b> <font color=\"blue\">j</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">j = 0</font>");
+							.html("<b><font color=\"green\">for</font></b> (Zeile <b> <font color=\"blue\">j</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">j = 2</font>");
 
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance+3*indent)
@@ -486,7 +486,8 @@ class D3Pseudocode extends D3Component {
 
 
 		this.PseudocodeGroup.selectAll("foreignObject.eintragsVergleich")
-					.html("neues D(<b><font color=\"blue\">i</font></b>,<b><font color=\"blue\">j</font></b>) = min( "+currentEntry+" , "+compareIK+"+"+compareKJ+")")
+					// .html("neues D(<b><font color=\"blue\">i</font></b>,<b><font color=\"blue\">j</font></b>) = min( "+currentEntry+" , "+compareIK+"+"+compareKJ+")")
+					.html("neues D(<b><font color=\"blue\">i</font></b>,<b><font color=\"blue\">j</font></b>) = min(&emsp;&emsp; <font color=\"white\">"+currentEntry+"</font> &emsp;&emsp;,&nbsp;&nbsp;&nbsp; "+compareIK+" &nbsp;&nbsp;&nbsp;+ &nbsp;&nbsp;&nbsp;"+compareKJ+"&nbsp;&nbsp;&nbsp;)")
 					.style("font-size", pseudocodeSize);
 
 			console.log("HERE",currentEntry)
