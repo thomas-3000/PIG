@@ -477,7 +477,7 @@ class D3Pseudocode extends D3Component {
 
 		this.PseudocodeGroup.selectAll("foreignObject.k")
 					.style("font-size", pseudocodeSize)
-					.html("<b><font color=\"green\">for</font></b> (Vergleich <b><font color=\"blue\">k</font></b> in 0 to N-1)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp; <font color=\"#bea106\">k = "+kWritten+"</font>")
+					.html("<b><font color=\"green\">for</font></b> (Vergleich <b><font color=\"blue\">k</font></b> in 0 to N-1)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">k = "+kWritten+"</font>")
 
 		this.PseudocodeGroup.selectAll("foreignObject.i")
 					.html("<b><font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 0 to N-1)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">i = "+iWritten+"</font>")

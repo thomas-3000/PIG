@@ -31,7 +31,6 @@ description:"my description" /]
   [NetworkClick /]
 
   [D3Matrix ignite:ignite i:i j:j k:k/]
-  [Button onClick: `if(ignite==0){ignite=1;}else{ignite=0}`]Start![/Button]
   // das sieht jetzt relativ scheiße aus, weil man nicht auf Sachen zugreifen,
   // welche in dem Ausdruck selber verändert werden
   // zB würde ich hier gerne oft auf "step" zugreifen, nachdem ich "step++" gemacht hab
@@ -115,7 +114,8 @@ Der Floyd-Warshall-Algorithmus nutzt das Prinzip der dynamischen Programmierung,
 Für alle Knoten mit dem Index k zwischen 1 und N (N ist die Anzahl der Knoten des Graphen) wird überprüft, ob der bisher bekannte Pfad zwischen Knotenpaaren verkürzt wird wenn er
 über den Knoten k führt (und sich damit aus den 2 Teilpfaden von den Knoten zu k zusammensetzt) oder nicht.
 Dabei wird die Matrix für jeden Knoten k von 1 bis N aufgerufen, die Veränderungen werden gespeichert und dann als Grundlage für die nächste Iteration verwendet.
-Um die Matrix des Netzwerks parallel zum Pseudocode zu sehen, bitte drücke [action onClick:`if(visnum==0){visnum=1}else{visnum=0};`]hier[/action].
+
+Unten siehst du das gleiche Netzerk, wie rechts. Um die Adjazensmatrix des Netzwerks zu sehen, drücke [action onClick:`if(visnum==0){visnum=1}else{visnum=0};`]hier[/action].
 [NetworkSteps i:i j:j k:k/]
 [Button onClick: `
     step--;
@@ -146,13 +146,16 @@ Um die Matrix des Netzwerks parallel zum Pseudocode zu sehen, bitte drücke [act
     };
     `]
 >[/Button]
-Als Pseudocode sieht dies so aus:
 
+Der Pseudocode unten zeigt dir welcher Vergleich für jede Iteration gemacht wird.
 
 [D3Pseudocode className:"d3-component" newPseudocode:newPseudocode state:state i:i k:k j:j/]
 
 
+Nachdem du ein paar Schritte durchgegangen bist, hast du das Prinzip bestimmt verstanden. Wir hoffen mit der Visualisierung
+geholfen zu haben!
 
+Lizenz: [link text:"CC-BY-SA 2.0" url:"https://creativecommons.org/licenses/by-sa/2.0/" /]
 ## Resultat des Algorithmus
 Die ursprüngliche Matrix sah so aus:
 [D3Matrix /]
