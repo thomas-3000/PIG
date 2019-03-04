@@ -94,7 +94,7 @@ Außerdem kann jede Kante ein Gewicht haben. Das nächste Bild zeigt einen volls
 [SVG src:"static/images/WithWeights2.svg" /]
 
 Jedes Netzwerk ist definiert durch die Anzahl der Knoten und die Kanten, welche sie verbinden. Dadurch kann man
-zu jeden Netzwerk eine Matrix angeben, die die Verbindungen des Netzwerks abbildet. Diese Matrix wird [link text:"Adjazensmatrix" url:"https://de.wikipedia.org/wiki/Adjazenzmatrix" /] genannt. Der Matrixeintrag mit Spalte 1 und Zeile 2
+zu jeden Netzwerk eine Matrix angeben, die die Verbindungen des Netzwerks abbildet. Diese Matrix wird [link text:"Adjazenzmatrix" url:"https://de.wikipedia.org/wiki/Adjazenzmatrix" /] genannt. Der Matrixeintrag mit Spalte 1 und Zeile 2
 gibt dann das Gewicht der Verbindung von Knoten 1 zum Knoten 2 an. Gibt es keine Verbindung von 1 nach 2, dann wird das Gewicht als
 unendlich aufgefasst.
 [SmallD3Matrix /]
