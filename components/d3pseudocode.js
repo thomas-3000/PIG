@@ -428,9 +428,12 @@ class D3Pseudocode extends D3Component {
 	update(props,oldProps) {
 		var newPseudocode = props['newPseudocode'];
 		var state = props['state'];
-			i = props['i'];
-			j = props['j'];
-			k = props['k'];
+			var i = props['i'];
+			var j = props['j'];
+			var k = props['k'];
+			var iWritten = i-1;
+			var jWritten = j-1;
+			var kWritten = k-1;
 		if (state<0) {state=0;} if (state>7) {state=7;}
 		if (k<1) {k=1;} if (k>5) {k=5;}
 		if (i<1) {i=1;} if (i>5) {i=5;}
@@ -474,14 +477,14 @@ class D3Pseudocode extends D3Component {
 
 		this.PseudocodeGroup.selectAll("foreignObject.k")
 					.style("font-size", pseudocodeSize)
-					.html("<b><font color=\"green\">for</font></b> (Vergleich <b><font color=\"blue\">k</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">k = "+k-1+"</font>")
+					.html("<b><font color=\"green\">for</font></b> (Vergleich <b><font color=\"blue\">k</font></b> in 0 to N-1)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">k = "+kWritten+"</font>")
 
 		this.PseudocodeGroup.selectAll("foreignObject.i")
-					.html("<b><font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">i = "+i-1+"</font>")
+					.html("<b><font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 0 to N-1)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">i = "+iWritten+"</font>")
 					.style("font-size", pseudocodeSize)
 
 		this.PseudocodeGroup.selectAll("foreignObject.j")
-					.html("<b><font color=\"green\">for</font></b> (Zeile <b> <font color=\"blue\">j</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">j = "+j-1+"</fonts>")
+					.html("<b><font color=\"green\">for</font></b> (Zeile <b> <font color=\"blue\">j</font></b> in 0 to N-1)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">j = "+jWritten+"</fonts>")
 					.style("font-size", pseudocodeSize)
 
 

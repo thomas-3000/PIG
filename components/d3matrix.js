@@ -128,25 +128,25 @@ class D3Matrix extends D3Component {
 		}]
 		var ijk = ["1","1","1"];
 		// line genarator
-		var line = d3.line()
-			.x(function(d) {return d.x})
-			.y(function(d) {return d.y})
-			.curve(d3.curveBasis);
-
-
-		matrixGroup.append("path")
-			.attr("class","border")
-			.attr("d",line(leftMatrixBorder))
-			.attr("fill","none")
-			.attr("stroke", "black")
-			.attr("stroke-width",2);
-
-		matrixGroup.append("path")
-			.attr("class","border")
-			.attr("d",line(rightMatrixBorder))
-			.attr("fill","none")
-			.attr("stroke","black")
-			.attr("stroke-width",2);
+		// var line = d3.line()
+		// 	.x(function(d) {return d.x})
+		// 	.y(function(d) {return d.y})
+		// 	.curve(d3.curveBasis);
+		//
+		//
+		// matrixGroup.append("path")
+		// 	.attr("class","border")
+		// 	.attr("d",line(leftMatrixBorder))
+		// 	.attr("fill","none")
+		// 	.attr("stroke", "black")
+		// 	.attr("stroke-width",2);
+		//
+		// matrixGroup.append("path")
+		// 	.attr("class","border")
+		// 	.attr("d",line(rightMatrixBorder))
+		// 	.attr("fill","none")
+		// 	.attr("stroke","black")
+		// 	.attr("stroke-width",2);
 
 
 		matrixGroup.selectAll("rect.horizontalHighlight")
@@ -161,7 +161,7 @@ class D3Matrix extends D3Component {
 			.attr("rx",20)
 			.attr("width",dim*xDistance+yOffset/2)
 			.attr("height",30)
-			.attr("opacity",0);
+			.attr("opacity",0.2);
 
 		matrixGroup.selectAll("rect.verticalHighlight")
 			.data(position)
@@ -175,55 +175,55 @@ class D3Matrix extends D3Component {
 			.attr("rx",20)
 			.attr("width",30)
 			.attr("height",dim*xDistance+xOffset/2)
-			.attr("opacity",0);
+			.attr("opacity",0.2);
 
 		matrixGroup.selectAll("line.vertOnComparator")
 			.data(onCompPosition)
 			.enter()
 			.append("line")
 			.attr("class","vertOnComparator")
-			.attr("x1",function(d,i) {return xCompOffset+i*xCompDist;})
 			.attr("y1",rectDist)
-			.attr("x2",function(d,i) {return xCompOffset+i*xCompDist;})
-			.attr("y2",rectDist +5 + yOffset)
+			.attr("y2",rectDist +5 + yOffset +1*yDistance)
+			.attr("x1",function(d,i) {return xCompOffset+i*xCompDist + 1*xDistance;})
+			.attr("x2",function(d,i) {return xCompOffset+i*xCompDist + 1*xDistance;})
 			.attr("stroke-width",2)
-			.attr("opacity",0);
+			// .attr("opacity",0);
 
 		matrixGroup.selectAll("line.horizOnComparator")
 			.data(onCompPosition)
 			.enter()
 			.append("line")
 			.attr("class","horizOnComparator")
-			.attr("y1",function(d,i) {return yCompOffset+i*yCompDist;})
 			.attr("x1",rectDist)
-			.attr("y2",function(d,i) {return yCompOffset+i*yCompDist;})
-			.attr("x2",rectDist +5 + xOffset)
+			.attr("x2",rectDist +5 + xOffset +1*yDistance)
+			.attr("y1",function(d,i) {return yCompOffset+i*yCompDist + 1*yDistance;})
+			.attr("y2",function(d,i) {return yCompOffset+i*yCompDist + 1*yDistance;})
 			.attr("stroke-width",2)
-			.attr("opacity",0);
+			// .attr("opacity",0);
 
 		matrixGroup.selectAll("line.closeVertOnComparator")
 			.data(onCompPosition)
 			.enter()
 			.append("line")
 			.attr("class","closeVertOnComparator")
-			.attr("y1", rectDist)
-			.attr("y2", rectDist)
-			.attr("x1", xCompOffset)
-			.attr("x2", xCompOffset+xCompDist)
+			.attr("y1",rectDist)
+			.attr("y2",rectDist)
+			.attr("x1", xCompOffset+1*xDistance)
+			.attr("x2", xCompOffset+xCompDist+1*xDistance)
 			.attr("stroke-width", 2)
-			.attr("opacity",0);
+			// .attr("opacity",0);
 
 		matrixGroup.selectAll("line.closeHorizOnComparator")
 			.data(onCompPosition)
 			.enter()
 			.append("line")
 			.attr("class","closeHorizOnComparator")
-			.attr("x1", rectDist)
-			.attr("x2", rectDist)
-			.attr("y1", yCompOffset)
-			.attr("y2", yCompOffset+yCompDist)
-			.attr("stroke-width", 2)
-			.attr("opacity",0);
+			.attr("x1",rectDist)
+			.attr("x2",rectDist)
+			.attr("y1", yCompOffset+1*yDistance)
+			.attr("y2", yCompOffset+yCompDist+1*yDistance)
+			.attr("stroke-width", 2);
+			// .attr("opacity",0);
 
 
 		matrixGroup.selectAll("circle.onComparator")
@@ -231,10 +231,12 @@ class D3Matrix extends D3Component {
 			.enter()
 			.append("circle")
 			.attr("class","onComparator")
-			.attr("cx",xCompOffset+0.5*xCompDist)
-			.attr("cy",yCompOffset+0.5*yCompDist)
+			.attr("cx",xCompOffset+0.5*xCompDist+1*xDistance)
+			.attr("cy",yCompOffset+0.5*yCompDist+1*yDistance)
+			// .attr("cx",xCompOffset+0.5*xCompDist)
+			// .attr("cy",yCompOffset+0.5*yCompDist)
 			.attr("r",15)
-			.attr("opacity",0);
+			// .attr("opacity",0);
 
 		//	for (var x=0;x<dim;x++){
 		// 	for (var y=0;y<dim;y++){
@@ -293,10 +295,19 @@ class D3Matrix extends D3Component {
 			.attr("font-size",15)
 			.attr("text-anchor","middle")
 			.attr("dominant-baseline","middle")
-			.attr("opacity",0)
+			// .attr("opacity",0)
 			.style("font-family","Futura")
 			.attr("font-weight", "bold");
 			//.attr("stroke-width","4");
+
+			this.matrixGroup.selectAll("text.elements").filter(function (d,n) {
+									return n === (2-1)+(dim*(2-1));
+								})
+				// .style("opacity", 0)
+				// .transition().duration(200)
+				// .style("opacity", 1)
+				.attr("fill","white")
+				.attr("font-size",30);
   }
 
 
@@ -329,7 +340,7 @@ class D3Matrix extends D3Component {
 		var colLight = k-1;
 		var rowComp = i-1;
 		var colComp = j-1;
-		var showAll = props['ignite'];
+		var showAll = 1;
 		var showMarks = 0;
 		var showHighlighter = 0;
 		var showMatrixBorders = 0;
@@ -496,10 +507,10 @@ class D3Matrix extends D3Component {
 									return n === (j-1)+(dim*(i-1));
 								})
 				.style("opacity", 0)
-				.transition().duration(200)
+				.transition().duration(800)
 				.style("opacity", 1)
 				.attr("fill","white")
-				.attr("font-size",35);
+				.attr("font-size",30);
 
 			this.matrixGroup.selectAll("text.elements").filter(function(d,n){
 									return n === (k-1)+(dim*(i-1));
