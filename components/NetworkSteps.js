@@ -29,7 +29,7 @@ const fw = new FloydWarshall2(weights, numVertices);
 
  var offSetColor = "#D3D3D3";// grey
 
- var offSetColorNode = "#1E90FF";//blue
+ var offSetColorNode = "#D3D3D3";//blue
  var smallNodeSize = 10;
  var bigNodeSize = 20;
 
@@ -197,7 +197,7 @@ function resetDisplayText(){
     pathStr.text("D(i,k) = ");
 }
 
-function highlightLabels(shortestPathArr, edgelabels){
+function highlightLabels(shortestPathArr, highlightColor, edgelabels){
  	var allEgdesLabels = [];
  	if(shortestPathArr.length<2){
  		return allEgdesLabels;
@@ -612,8 +612,8 @@ force.on("tick", function(){
 	          var ikPath = ikjPath.get_ikPathWay();
 
 	          this.currentColouredEdges_ikj_ik = highlightShortestPath(ikPath, intermediateColor,this.path, this.colorEdgeMatrix);
-	          // currentColouredLabel_ikj_ik = highlightLabels(ikPath, intermediateColor, this.edgelabels);
-						this.currentColouredLabel_ikj_ik = highlightLabels(ikPath, this.edgelabels);
+	          this.currentColouredLabel_ikj_ik = highlightLabels(ikPath, intermediateColor, this.edgelabels);
+						//this.currentColouredLabel_ikj_ik = highlightLabels(ikPath, this.edgelabels);
 	        }
 
 	        if (ikjPath.get_ikPathWeight() != null) {
@@ -627,8 +627,8 @@ force.on("tick", function(){
 	          var kjPath = ikjPath.get_kjPathWay();
 	          this.currentColouredEdges_ikj_kj = highlightShortestPath(kjPath, intermediateColor_kj,this.path, this.colorEdgeMatrix);
 						console.log("aufruf labels", this.edgelabels);
-	          // currentColouredLabel_ikj_kj = highlightLabels(kjPath, intermediateColor_kj, this.edgelabels);
-						this.currentColouredLabel_ikj_kj = highlightLabels(kjPath, this.edgelabels);
+	          this.currentColouredLabel_ikj_kj = highlightLabels(kjPath, intermediateColor_kj, this.edgelabels);
+						//this.currentColouredLabel_ikj_kj = highlightLabels(kjPath, this.edgelabels);
 	        }
 
 	        if (ikjPath.get_kjPathWeight() != null) {
