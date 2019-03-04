@@ -192,7 +192,7 @@ class D3Pseudocode extends D3Component {
 					        .attr("class", "k")
 									.append("xhtml:div")
 							.style("font-size", pseudocodeSize)
-							.html("<b><font color=\"green\">for</font></b> (Vergleich <b><font color=\"blue\">k</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">k = 0</font>");
+							.html("<b><font color=\"green\">for</font></b> (Vergleich <b><font color=\"blue\">k</font></b> in 0 to N-1)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">k = 0</font>");
 
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance+indent)
@@ -202,7 +202,7 @@ class D3Pseudocode extends D3Component {
 					        .attr("class", "i")
 									.append("xhtml:div")
 							.style("font-size", pseudocodeSize)
-							.html("<b><font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">i = 2</font>");
+							.html("<b><font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 0 to N-1)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">i = 1</font>");
 
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance+2*indent)
@@ -212,7 +212,7 @@ class D3Pseudocode extends D3Component {
 					        .attr("class", "j")
 									.append("xhtml:div")
 							.style("font-size", pseudocodeSize)
-							.html("<b><font color=\"green\">for</font></b> (Zeile <b> <font color=\"blue\">j</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">j = 2</font>");
+							.html("<b><font color=\"green\">for</font></b> (Zeile <b> <font color=\"blue\">j</font></b> in 0 to N-1)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">j = 1</font>");
 
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance+3*indent)
@@ -474,14 +474,14 @@ class D3Pseudocode extends D3Component {
 
 		this.PseudocodeGroup.selectAll("foreignObject.k")
 					.style("font-size", pseudocodeSize)
-					.html("<b><font color=\"green\">for</font></b> (Vergleich <b><font color=\"blue\">k</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">k = "+k+"</font>")
+					.html("<b><font color=\"green\">for</font></b> (Vergleich <b><font color=\"blue\">k</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">k = "+k-1+"</font>")
 
 		this.PseudocodeGroup.selectAll("foreignObject.i")
-					.html("<b><font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">i = "+i+"</font>")
+					.html("<b><font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">i = "+i-1+"</font>")
 					.style("font-size", pseudocodeSize)
 
 		this.PseudocodeGroup.selectAll("foreignObject.j")
-					.html("<b><font color=\"green\">for</font></b> (Zeile <b> <font color=\"blue\">j</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">j = "+j+"</fonts>")
+					.html("<b><font color=\"green\">for</font></b> (Zeile <b> <font color=\"blue\">j</font></b> in 1 to N)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">j = "+j-1+"</fonts>")
 					.style("font-size", pseudocodeSize)
 
 
