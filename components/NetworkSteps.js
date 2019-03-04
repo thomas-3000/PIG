@@ -535,128 +535,128 @@ force.on("tick", function(){
       });
     });
 
-canvas.on("dblclick", function(){
-	// var thisStep = storeAllSteps[stepCounter];
-		var thisStep = [counter, props['i'],props['j'],props['k'] ]
-    var ikWeight = null;
-    var kjWeight = null;
-    var k = thisStep[1];
-    var i = thisStep[2];
-    var j = thisStep[3];
-
-    if (k != this.currentKNode) {
-        if (this.k_destNode != null) {
-          resetSingleNode(this.k_destNode);
-          this.currentKNode=k;
-          this.k_destNode = getSelectedNode(k,node);
-        }
-      }
-
-    if (ikj_startNode != null) {
-      resetSingleNode(ikj_startNode);
-    }
-
-    if (ikj_destNode != null) {
-      resetSingleNode(ikj_destNode);
-    }
-
-    if (this.currentColouredEdges_ikj != null) {
-      this.currentColouredEdges_ikj = resetColouredEdges(this.currentColouredEdges_ikj, this.colorEdgeMatrix);
-    }
-
-    if (this.currentColouredLabel_ikj != null) {
-      this.currentColouredLabel_ikj = resetColouredEdgeLabel(currentColouredLabel_ikj);
-    }
-
-    if (this.currentColouredEdges_ikj_ik != null) {
-      this.currentColouredEdges_ikj_ik = resetColouredEdges(this.currentColouredEdges_ikj_ik, this.colorEdgeMatrix);
-    }
-
-    if (this.currentColouredLabel_ikj_ik != null) {
-      this.currentColouredLabel_ikj_ik = resetColouredEdgeLabel(this.currentColouredLabel_ikj_ik);
-    }
-
-    if (this.currentColouredEdges_ikj_kj != null) {
-      this.currentColouredEdges_ikj_kj = resetColouredEdges(this.currentColouredEdges_ikj_kj, this.colorEdgeMatrix);
-    }
-
-    if (this.currentColouredLabel_ikj_kj != null) {
-      this.currentColouredLabel_ikj_kj = resetColouredEdgeLabel(this.currentColouredLabel_ikj_kj);
-    }
-
-    console.log(thisStep);
-    if (k != j && k != i && i!=j) {
-
-      var ikjPath = fw.findPathsOverVertexK(thisStep);
-      if (ikjPath.get_resultPath() != null) {
-        console.log("i: ", i, "| j: ", j);
-        ikj_startNode = getSelectedNode(i);
-        ikj_destNode = getSelectedNode(j);
-
-        if (k != i) {
-          console.log("I START", i," ",k);
-          console.log("ikj_startNode", ikj_startNode);
-          highlightSingleNode(ikj_startNode, highlightColor2ndStart,"Start");
-        }
-        if (k != j) {
-          highlightSingleNode(ikj_destNode, highlightColor,"Ziel");
-        }
-
-        if (ikjPath.get_ikPathWay() != null) {
-          var ikPath = ikjPath.get_ikPathWay();
-
-          this.currentColouredEdges_ikj_ik = highlightShortestPath(ikPath, intermediateColor,this.path,this.colorEdgeMatrix);
-          // currentColouredLabel_ikj_ik = highlightLabels(ikPath, intermediateColor, this.edgelabels);
-					this.currentColouredLabel_ikj_ik = highlightLabels(ikPath, this.edgelabels);
-
-        }
-
-        if (ikjPath.get_ikPathWeight() != null) {
-          ikWeight = ikjPath.get_ikPathWeight();
-          // ikWeight = ikWeight.fontcolor(highlightColor);
-        } else {
-          ikWeight = null;
-        }
-
-        if (ikjPath.get_kjPathWay() != null) {
-          var kjPath = ikjPath.get_kjPathWay();
-          this.currentColouredEdges_ikj_kj = highlightShortestPath(kjPath, intermediateColor_kj,this.path, this.colorEdgeMatrix);
-          // currentColouredLabel_ikj_kj = highlightLabels(kjPath, intermediateColor_kj, this.edgelabels);
-					this.currentColouredLabel_ikj_kj = highlightLabels(kjPath, this.edgelabels);
-        }
-
-        if (ikjPath.get_kjPathWeight() != null) {
-          kjWeight = ikjPath.get_kjPathWeight();
-
-        } else {
-          kjWeight = null;
-        }
-
-        updateDisplay_ikj(i, k, j, ikWeight, kjWeight,this.title, this.pathStr, this.sum);
-
-        // if (ikjPath.get_previousPathWay() != null) {
-        // var previousPath = ikjPath.get_previousPathWay();
-        // currentColouredEdges_ikj = highlightShortestPath_BOLT(previousPath, bigWidthEdge*1.5);
-        // //currentColouredLabel_ikj = highlightLabels(previousPath, highlightColor);
-        // }
-
-      }
-      if (k != this.currentKNode) {
-        if (this.k_destNode != null) {
-          resetSingleNode(this.k_destNode);
-        }
-        this.currentKNode = k;
-        this.k_destNode = getSelectedNode(k);
-        highlightSingleNode(this.k_destNode, nodeKcolor,"Station");
-      } else {
-        highlightSingleNode(this.k_destNode, nodeKcolor,"Station");
-      }
-
-    }
-
-    stepCounter = stepCounter + 1;
-
-  });
+// canvas.on("dblclick", function(){
+// 	// var thisStep = storeAllSteps[stepCounter];
+// 		var thisStep = [counter, props['i'],props['j'],props['k'] ]
+//     var ikWeight = null;
+//     var kjWeight = null;
+//     var k = thisStep[1];
+//     var i = thisStep[2];
+//     var j = thisStep[3];
+//
+//     if (k != this.currentKNode) {
+//         if (this.k_destNode != null) {
+//           resetSingleNode(this.k_destNode);
+//           this.currentKNode=k;
+//           this.k_destNode = getSelectedNode(k,node);
+//         }
+//       }
+//
+//     if (ikj_startNode != null) {
+//       resetSingleNode(ikj_startNode);
+//     }
+//
+//     if (ikj_destNode != null) {
+//       resetSingleNode(ikj_destNode);
+//     }
+//
+//     if (this.currentColouredEdges_ikj != null) {
+//       this.currentColouredEdges_ikj = resetColouredEdges(this.currentColouredEdges_ikj, this.colorEdgeMatrix);
+//     }
+//
+//     if (this.currentColouredLabel_ikj != null) {
+//       this.currentColouredLabel_ikj = resetColouredEdgeLabel(currentColouredLabel_ikj);
+//     }
+//
+//     if (this.currentColouredEdges_ikj_ik != null) {
+//       this.currentColouredEdges_ikj_ik = resetColouredEdges(this.currentColouredEdges_ikj_ik, this.colorEdgeMatrix);
+//     }
+//
+//     if (this.currentColouredLabel_ikj_ik != null) {
+//       this.currentColouredLabel_ikj_ik = resetColouredEdgeLabel(this.currentColouredLabel_ikj_ik);
+//     }
+//
+//     if (this.currentColouredEdges_ikj_kj != null) {
+//       this.currentColouredEdges_ikj_kj = resetColouredEdges(this.currentColouredEdges_ikj_kj, this.colorEdgeMatrix);
+//     }
+//
+//     if (this.currentColouredLabel_ikj_kj != null) {
+//       this.currentColouredLabel_ikj_kj = resetColouredEdgeLabel(this.currentColouredLabel_ikj_kj);
+//     }
+//
+//     console.log(thisStep);
+//     if (k != j && k != i && i!=j) {
+//
+//       var ikjPath = fw.findPathsOverVertexK(thisStep);
+//       if (ikjPath.get_resultPath() != null) {
+//         console.log("i: ", i, "| j: ", j);
+//         ikj_startNode = getSelectedNode(i);
+//         ikj_destNode = getSelectedNode(j);
+//
+//         if (k != i) {
+//           console.log("I START", i," ",k);
+//           console.log("ikj_startNode", ikj_startNode);
+//           highlightSingleNode(ikj_startNode, highlightColor2ndStart,"Start");
+//         }
+//         if (k != j) {
+//           highlightSingleNode(ikj_destNode, highlightColor,"Ziel");
+//         }
+//
+//         if (ikjPath.get_ikPathWay() != null) {
+//           var ikPath = ikjPath.get_ikPathWay();
+//
+//           this.currentColouredEdges_ikj_ik = highlightShortestPath(ikPath, intermediateColor,this.path,this.colorEdgeMatrix);
+//           // currentColouredLabel_ikj_ik = highlightLabels(ikPath, intermediateColor, this.edgelabels);
+// 					this.currentColouredLabel_ikj_ik = highlightLabels(ikPath, this.edgelabels);
+//
+//         }
+//
+//         if (ikjPath.get_ikPathWeight() != null) {
+//           ikWeight = ikjPath.get_ikPathWeight();
+//           // ikWeight = ikWeight.fontcolor(highlightColor);
+//         } else {
+//           ikWeight = null;
+//         }
+//
+//         if (ikjPath.get_kjPathWay() != null) {
+//           var kjPath = ikjPath.get_kjPathWay();
+//           this.currentColouredEdges_ikj_kj = highlightShortestPath(kjPath, intermediateColor_kj,this.path, this.colorEdgeMatrix);
+//           // currentColouredLabel_ikj_kj = highlightLabels(kjPath, intermediateColor_kj, this.edgelabels);
+// 					this.currentColouredLabel_ikj_kj = highlightLabels(kjPath, this.edgelabels);
+//         }
+//
+//         if (ikjPath.get_kjPathWeight() != null) {
+//           kjWeight = ikjPath.get_kjPathWeight();
+//
+//         } else {
+//           kjWeight = null;
+//         }
+//
+//         updateDisplay_ikj(i, k, j, ikWeight, kjWeight,this.title, this.pathStr, this.sum);
+//
+//         // if (ikjPath.get_previousPathWay() != null) {
+//         // var previousPath = ikjPath.get_previousPathWay();
+//         // currentColouredEdges_ikj = highlightShortestPath_BOLT(previousPath, bigWidthEdge*1.5);
+//         // //currentColouredLabel_ikj = highlightLabels(previousPath, highlightColor);
+//         // }
+//
+//       }
+//       if (k != this.currentKNode) {
+//         if (this.k_destNode != null) {
+//           resetSingleNode(this.k_destNode);
+//         }
+//         this.currentKNode = k;
+//         this.k_destNode = getSelectedNode(k);
+//         highlightSingleNode(this.k_destNode, nodeKcolor,"Station");
+//       } else {
+//         highlightSingleNode(this.k_destNode, nodeKcolor,"Station");
+//       }
+//
+//     }
+//
+//     stepCounter = stepCounter + 1;
+//
+//   });
 
 
 
@@ -672,7 +672,7 @@ canvas.on("dblclick", function(){
 
 
 		update(props,oldProps){
-			var thisStep = [counter, props['i'],props['j'],props['k'] ]
+			var thisStep = [counter, props['k']-1,props['i']-1,props['j']-1 ]
 	    var ikWeight = null;
 	    var kjWeight = null;
 	    var k = thisStep[1];
