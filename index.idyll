@@ -15,7 +15,6 @@ description:"my description" /]
 [var name:"i" value:2 /]
 [var name:"j" value:2 /]
 [var name:"ignite" value:0 /]
-[var name:"k" value:1 /]
 [var name:"visnum" value:0 /]
 
 
@@ -29,7 +28,7 @@ description:"my description" /]
   [blankComponent /]
   // Ducs Graph
   [p]###Klicke zwei Knoten an[/p]
-  [Network2 /]
+  [NetworkClick /]
 
   [D3Matrix ignite:ignite i:i j:j k:k/]
   [Button onClick: `if(ignite==0){ignite=1;}else{ignite=0}`]Start![/Button]
@@ -77,22 +76,22 @@ description:"my description" /]
 ## Was ist ein Netzwerk?
 Ein Netzwerk besteht aus einer Menge von eindeutigen Punkten, die Knoten genannt werden.
 
-[SVG src:"static/images/Nodes3.svg" /]
+[SVG src:"static/images/Nodes4.svg" /]
 [br/]
 Diese Knoten können durch sogenannte Kanten verbunden sein. Gilt die Kante zwischen zwei Knoten
 für beide Richtungen, so spricht man von einem ungerichteten Graphen
 //(Netzwerk wäre hier iwie falsch).
 
-[SVG src:"static/images/Undirected3.svg" /]
+[SVG src:"static/images/Undirected4.svg" /]
 
 Im Gegenteil kann auch eine Kante nur für eine Richtung gelten. Deshalb wird der folgende Graph auch
 gerichteter Graph genannt.
 
-[SVG src:"static/images/Directed4.svg" /]
+[SVG src:"static/images/Directed5.svg" /]
 
 Außerdem kann jede Kante ein Gewicht haben. Das nächste Bild zeigt einen vollständigen Graphen.
 
-[SVG src:"static/images/WithWeights.svg" /]
+[SVG src:"static/images/WithWeights2.svg" /]
 
 Jedes Netzwerk ist definiert durch die Anzahl der Knoten und die Kanten, welche sie verbinden. Dadurch kann man
 zu jeden Netzwerk eine Matrix angeben, die die Verbindungen des Netzwerks abbildet. Diese Matrix wird [link text:"Adjazensmatrix" url:"https://de.wikipedia.org/wiki/Adjazenzmatrix" /] genannt. Der Matrixeintrag mit Spalte 1 und Zeile 2
@@ -117,7 +116,36 @@ Für alle Knoten mit dem Index k zwischen 1 und N (N ist die Anzahl der Knoten d
 über den Knoten k führt (und sich damit aus den 2 Teilpfaden von den Knoten zu k zusammensetzt) oder nicht.
 Dabei wird die Matrix für jeden Knoten k von 1 bis N aufgerufen, die Veränderungen werden gespeichert und dann als Grundlage für die nächste Iteration verwendet.
 Um die Matrix des Netzwerks parallel zum Pseudocode zu sehen, bitte drücke [action onClick:`if(visnum==0){visnum=1}else{visnum=0};`]hier[/action].
-
+[NetworkSteps i:i j:j k:k/]
+[Button onClick: `
+    step--;
+    k = Math.floor( (step-1)/((dim-1)*(dim-1)))%(dim)+1;
+    j = (step-1)%(dim-1) +1;
+    // if j>=k: j++
+    if (((step-1)%(dim-1) +1)>=(Math.floor( (step-1)/((dim-1)*(dim-1)))%(dim)+1)){
+      j = (step-1)%(dim-1) +2;
+    };
+    i = Math.floor((step-1)/(dim-1))%(dim-1)+1;
+    // if i>=k: i++
+    if ((Math.floor((step-1)/(dim-1))%(dim-1)+1)>=(Math.floor( (step-1)/((dim-1)*(dim-1)))%(dim)+1)){
+      i = Math.floor((step-1)/(dim-1))%(dim-1)+2;
+    };
+    `]
+<[/Button] [Button onClick: `
+    step++;
+    k = Math.floor( (step+1)/((dim-1)*(dim-1)))%(dim)+1;
+    j = (step+1)%(dim-1) +1;
+    // if j>=k: j++
+    if (((step+1)%(dim-1) +1)>=(Math.floor( (step+1)/((dim-1)*(dim-1)))%(dim)+1)){
+      j = (step+1)%(dim-1) +2;
+    };
+    i = Math.floor((step+1)/(dim-1))%(dim-1)+1;
+    // if i>=k: i++
+    if ((Math.floor((step+1)/(dim-1))%(dim-1)+1)>=(Math.floor( (step+1)/((dim-1)*(dim-1)))%(dim)+1)){
+      i = Math.floor((step+1)/(dim-1))%(dim-1)+2;
+    };
+    `]
+>[/Button]
 Als Pseudocode sieht dies so aus:
 
 
