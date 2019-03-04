@@ -84,10 +84,10 @@ p {
   color: var(--color0);
 }
 .horizontalHighlight {
-  fill: var(--color1);
+  fill: #FFD700;
 }
 .verticalHighlight {
-  fill: var(--color1);
+  fill: #FFD700;
 }
 .vertOnComparator{
   stroke: var(--color2);

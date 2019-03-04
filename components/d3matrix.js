@@ -291,7 +291,7 @@ class D3Matrix extends D3Component {
 				//other half where y positions of elements is
 				else{return (i-dim)*yDistance+yOffset;}
 			})
-			.attr("fill","green")
+			// .attr("fill","green")
 			.attr("font-size",15)
 			.attr("text-anchor","middle")
 			.attr("dominant-baseline","middle")
@@ -501,6 +501,20 @@ class D3Matrix extends D3Component {
 			// .style("opacity", 1)
 			.attr("fill","white")
 			.attr("font-size",30);
+
+			this.matrixGroup.selectAll("text.elements").filter(function(d,n){
+									return n === (k-1)+(dim*(i-1));
+								})
+				.transition().duration(50)
+				.attr("fill","#ff5959")
+				.attr("font-size",30);
+
+			this.matrixGroup.selectAll("text.elements").filter(function(d,n){
+									return n === (j-1)+(dim*(k-1));
+								})
+				.transition().duration(50)
+				.attr("fill","#00cc44")
+				.attr("font-size",30);
 		// animation if there is a change in the matrix
 		if (oldMatrix[i-1][j-1] != newMatrix[i-1][j-1]){
 			this.matrixGroup.selectAll("text.elements").filter(function (d,n) {
@@ -518,7 +532,7 @@ class D3Matrix extends D3Component {
 				.style("opacity", 0)
 				.transition().duration(200)
 				.style("opacity", 1)
-				.attr("fill","green")
+				.attr("fill","#00cc44")
 				.attr("font-size",30);
 
 			this.matrixGroup.selectAll("text.elements").filter(function(d,n){
@@ -527,7 +541,7 @@ class D3Matrix extends D3Component {
 				.style("opacity", 0)
 				.transition().duration(200)
 				.style("opacity", 1)
-				.attr("fill","green")
+				.attr("fill","#ff5959")
 				.attr("font-size",30);
 
 			// HERE I want to move copies of the comparator values to move to the new value

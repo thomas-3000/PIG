@@ -160,7 +160,7 @@ class D3Pseudocode extends D3Component {
 									.attr("class","belowCurrent")
 									.attr("cx",312)
 									.attr("cy",225)
-									.attr("r",12);
+									.attr("r",15);
 
 			PseudocodeGroup.append("foreignObject")
 					        .attr("x",xDistance)
@@ -477,7 +477,7 @@ class D3Pseudocode extends D3Component {
 
 		this.PseudocodeGroup.selectAll("foreignObject.k")
 					.style("font-size", pseudocodeSize)
-					.html("<b><font color=\"green\">for</font></b> (Vergleich <b><font color=\"blue\">k</font></b> in 0 to N-1)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">k = "+kWritten+"</font>")
+					.html("<b><font color=\"green\">for</font></b> (Vergleich <b><font color=\"blue\">k</font></b> in 0 to N-1)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp; <font color=\"#bea106\">k = "+kWritten+"</font>")
 
 		this.PseudocodeGroup.selectAll("foreignObject.i")
 					.html("<b><font color=\"green\">for</font></b> (Spalte <b> <font color=\"blue\">i</font></b> in 0 to N-1)&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font color=\"red\">i = "+iWritten+"</font>")
@@ -490,7 +490,7 @@ class D3Pseudocode extends D3Component {
 
 		this.PseudocodeGroup.selectAll("foreignObject.eintragsVergleich")
 					// .html("neues D(<b><font color=\"blue\">i</font></b>,<b><font color=\"blue\">j</font></b>) = min( "+currentEntry+" , "+compareIK+"+"+compareKJ+")")
-					.html("neues D(<b><font color=\"blue\">i</font></b>,<b><font color=\"blue\">j</font></b>) = min(&emsp;&emsp; <font color=\"white\">"+currentEntry+"</font> &emsp;&emsp;,&nbsp;&nbsp;&nbsp; "+compareIK+" &nbsp;&nbsp;&nbsp;+ &nbsp;&nbsp;&nbsp;"+compareKJ+"&nbsp;&nbsp;&nbsp;)")
+					.html("neues D(<b><font color=\"blue\">i</font></b>,<b><font color=\"blue\">j</font></b>) = min(&emsp;&emsp; <font color=\"white\">"+currentEntry+"</font> &emsp;&emsp;,&nbsp;&nbsp;&nbsp; "+compareIK+" &nbsp;&nbsp;+&nbsp;&nbsp;"+compareKJ+"&nbsp;&nbsp;)")
 					.style("font-size", pseudocodeSize);
 
 			console.log("HERE",currentEntry)
