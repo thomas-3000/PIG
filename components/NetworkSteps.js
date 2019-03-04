@@ -596,16 +596,16 @@ force.on("tick", function(){
 	      var ikjPath = fw.findPathsOverVertexK(thisStep);
 	      if (ikjPath.get_resultPath() != null) {
 	        console.log("i: ", i, "| j: ", j);
-	        var ikj_startNode = getSelectedNode(i,this.node);
-	        var ikj_destNode = getSelectedNode(j,this.node);
+	        this.ikj_startNode = getSelectedNode(i,this.node);
+	        this.ikj_destNode = getSelectedNode(j,this.node);
 
 	        if (k != i) {
 	          console.log("I START", i," ",k);
-	          console.log("ikj_startNode", ikj_startNode);
-	          highlightSingleNode(ikj_startNode, highlightColor2ndStart,"Start");
+	          console.log("ikj_startNode", this.ikj_startNode);
+	          highlightSingleNode(this.ikj_startNode, highlightColor2ndStart,"Start");
 	        }
 	        if (k != j) {
-	          highlightSingleNode(ikj_destNode, highlightColor,"Ziel");
+	          highlightSingleNode(this.ikj_destNode, highlightColor,"Ziel");
 	        }
 
 	        if (ikjPath.get_ikPathWay() != null) {
