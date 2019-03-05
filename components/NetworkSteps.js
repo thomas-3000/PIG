@@ -235,6 +235,7 @@ function getSelectedNode(integerNum,node) {
 }
 
 function highlightSingleNode(thisNode, color, label){
+	 console.log("highlightSingleNode:",thisNode);
 	 d3.select(thisNode).select("text").transition()
         .duration(750)
         .attr("x", -3.5)
@@ -556,6 +557,7 @@ force.on("tick", function(){
 	    var i = thisStep[2];
 	    var j = thisStep[3];
 			console.log("CURRENT K NODE", this.currentKNode)
+			console.log("ikj_startNode",this.ikj_startNode)
 	    if (k != this.currentKNode) {
 	        if (this.k_destNode != null) {
 	          resetSingleNode(this.k_destNode);
@@ -598,9 +600,10 @@ force.on("tick", function(){
 
 	    console.log(thisStep);
 	    if (k != j && k != i && i!=j) {
+				console.log("NETWORK: i!j!k");
 
 	      var ikjPath = fw.findPathsOverVertexK(thisStep);
-	      if (ikjPath.get_resultPath() != null) {
+	      // if (ikjPath.get_resultPath() != null) {
 	        console.log("i: ", i, "| j: ", j);
 	        this.ikj_startNode = getSelectedNode(i,this.node);
 	        this.ikj_destNode = getSelectedNode(j,this.node);
@@ -652,7 +655,14 @@ force.on("tick", function(){
 	        // //currentColouredLabel_ikj = highlightLabels(previousPath, highlightColor);
 	        // }
 
-	      }
+	      // }else{
+				// 	console.log("ikjPath = null!");
+				// 	this.ikj_startNode = getSelectedNode(i,this.node);
+				// 	this.ikj_destNode = getSelectedNode(j,this.node);
+				// 	highlightSingleNode(this.ikj_startNode, highlightColor2ndStart,"Start");
+				// 	highlightSingleNode(this.ikj_destNode, highlightColor,"Ziel");
+				// 	updateDisplay_ikj(i, k, j, ikWeight, kjWeight,this.title, this.pathStr, this.sum);
+				// }
 	      if (k != this.currentKNode) {
 	        if (this.k_destNode != null) {
 	          resetSingleNode(this.k_destNode);
