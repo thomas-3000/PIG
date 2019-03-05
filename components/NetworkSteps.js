@@ -30,7 +30,7 @@ const fw = new FloydWarshall2(weights, numVertices);
  var offSetColor = "#D3D3D3";// grey
 
  var offSetColorNode = "#D3D3D3";//blue
- var smallNodeSize = 10;
+ var smallNodeSize = 15;
  var bigNodeSize = 20;
 
  var highlightColor = "#00cc44";//red
@@ -134,9 +134,10 @@ function resetSingleNode(thisNode){
 	        .style("stroke", "none")
 	        .style("fill", letterColor)
 	        .style("stroke", "none")
-	        .style("font", "10px sans-serif")
+	        .style("font-size", "15px")
+					.style("font-family","Futura")
           .text(function(d) {
-          return d.name;
+          return "0"+d.name;
     });
 	thisNode = null;
 }
@@ -239,9 +240,10 @@ function highlightSingleNode(thisNode, color, label){
         .attr("x", -3.5)
         .style("stroke", "#87CEFA")
         .style("stroke-width", ".5px")
-        .style("font", "20px sans-serif")
+        .style("font-size", "20px")
+				.style("font-family","Futura")
         .text(function(d) {
-          var modifiedName = d.name +"   "+label;
+          var modifiedName = "0"+d.name +"   "+label;
           return modifiedName;
           });
 
@@ -476,9 +478,13 @@ node.append("svg:circle")
 
 // add the text
 node.append("text")
+		.attr("class","nodetext")
     .attr("x", -3.5)
-    .attr("dy", ".15em")
-    .text(function(d) { return d.name; });
+		.attr("dx", "-.35em")
+    .attr("dy", ".35em")
+    .text(function(d) { return "0"+d.name; })
+		.style("font-size","15px")
+		.style("font-family","Futura");
 //node.on("click", click);
 
 

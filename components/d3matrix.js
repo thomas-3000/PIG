@@ -515,16 +515,33 @@ class D3Matrix extends D3Component {
 				.transition().duration(50)
 				.attr("fill","#00cc44")
 				.attr("font-size",30);
+
+			this.matrixGroup.selectAll("text.marks").filter(function(d,n){
+									return n === j-1;
+								})
+				.attr("fill","#00cc44");
+
+			this.matrixGroup.selectAll("text.marks").filter(function(d,n){
+									return n === dim + i-1;
+								})
+				.attr("fill","#ff5959");
+
+			this.matrixGroup.selectAll("text.marks").filter(function(d,n){
+									return (n!== j-1) && (n!== dim+i-1);
+								})
+				.attr("fill","black");
 		// animation if there is a change in the matrix
 		if (oldMatrix[i-1][j-1] != newMatrix[i-1][j-1]){
 			this.matrixGroup.selectAll("text.elements").filter(function (d,n) {
 									return n === (j-1)+(dim*(i-1));
 								})
 				.style("opacity", 0)
-				.transition().duration(800)
+				.transition().duration(500)
 				.style("opacity", 1)
 				.attr("fill","white")
-				.attr("font-size",30);
+				.attr("font-size",40)
+				.transition().duration(300)
+				.attr("font-size",30)
 
 			this.matrixGroup.selectAll("text.elements").filter(function(d,n){
 									return n === (k-1)+(dim*(i-1));
@@ -532,7 +549,7 @@ class D3Matrix extends D3Component {
 				.style("opacity", 0)
 				.transition().duration(200)
 				.style("opacity", 1)
-				.attr("fill","#00cc44")
+				.attr("fill","#ff5959")
 				.attr("font-size",30);
 
 			this.matrixGroup.selectAll("text.elements").filter(function(d,n){
@@ -541,7 +558,7 @@ class D3Matrix extends D3Component {
 				.style("opacity", 0)
 				.transition().duration(200)
 				.style("opacity", 1)
-				.attr("fill","#ff5959")
+				.attr("fill","#00cc44")
 				.attr("font-size",30);
 
 			// HERE I want to move copies of the comparator values to move to the new value
@@ -566,7 +583,7 @@ class D3Matrix extends D3Component {
 		}
 
 		// make all others one black again
-		console.log("blend black i",i,"j",j,j-2 + (5*(i-1)));
+		// console.log("blend black i",i,"j",j,j-2 + (5*(i-1)));
 		this.matrixGroup.selectAll("text.elements").filter(function (d,n) {
 								return n !== (j-1) +(5*(i-1));
 							})

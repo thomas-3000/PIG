@@ -41,7 +41,7 @@ class SmallD3Matrix extends D3Component {
                                     .attr("height",h);
 
 
-    var Matrix = [["0","∞","∞"],["1","0","-2"],["2","5","0"]]
+    var Matrix = [["0","∞","2"],["1","0","5"],["∞","-2","0"]]
 		// concatenate 2d array in one list
 		var data = MatrixToList(Matrix);
 		// Group that contains every element of the Matrix
