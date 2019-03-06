@@ -71,7 +71,11 @@ description:"my description" /]
 // i=[Display value:i /],
 // step = [Display value:step /]
 
-// Pics von wikipedia (public domain) [link text:"Graph" url:"https://de.wikipedia.org/wiki/Graph_(Graphentheorie)" /]
+## Wie du diese Seite benutzt
+Auf der rechten Seite ist ein Netzwerk. Wenn du zwei Konten anklickst, wird dir der kürzeste Pfad zwischen den beiden angezeigt.
+Hier auf der linken Seite kannst du eine kurze Einführung zu Netzwerken und dem Floyd-Warshall Algorithmus lesen. Weiter unten wird
+der Algorithmus visuell durchlaufen um die einzelnen Schritte zu verdeutlichen.
+
 ## Was ist ein Netzwerk?
 Ein Netzwerk besteht aus einer Menge von eindeutigen Punkten, die Knoten genannt werden.
 
@@ -107,17 +111,24 @@ ab. Dadurch vermeiden wir den Aufwand, die Lösung eines Teilteilproblems jedes 
 
 Als einer der klassischen Vertreter der dynamischen Programmierung kann der Floyd-Warshall-Algorithmus das kürzeste-Pfad-Problem für alle Knotenpaare auf einen gerichteten Graphen lösen.
 
-
-
 ##Der Floyd-Warshall-Algorithmus
 
 Der Floyd-Warshall-Algorithmus nutzt das Prinzip der dynamischen Programmierung, um in einem gewichteten Graphen den kürzesten Pfad zwischen allen Paaren von Knoten zu berechnen.
-Für alle Knoten mit dem Index k zwischen 1 und N (N ist die Anzahl der Knoten des Graphen) wird überprüft, ob der bisher bekannte Pfad zwischen Knotenpaaren verkürzt wird wenn er
-über den Knoten k führt (und sich damit aus den 2 Teilpfaden von den Knoten zu k zusammensetzt) oder nicht.
-Dabei wird die Matrix für jeden Knoten k von 1 bis N aufgerufen, die Veränderungen werden gespeichert und dann als Grundlage für die nächste Iteration verwendet.
+Nehmen wir uns zum erklären das Netzwerk, welches unten zu sehen ist, als Beispiel. Zuerst wählt sich der Algorithmus den ersten Knoten als
+[colorText value:0 /] aus. Dann wählt er den [colorText value:1 /] aus und den [colorText value:2 /]. Jetzt vergleicht der Algorithmus,
+ob der bekannte Weg vom Startknoten zum Endknoten ein kleineres Gewicht hat, als der neue Weg vom Startknoten zum Vergleichsknoten zum Endknoten.
+Da der Start- und Endknoten hier derselbe Knoten ist, ist der bekannte Weg ein einfaches Stehenbleiben mit Gewicht 0.
+Das Gewicht vom  [colorText value:1/] zum [colorText value:0 /] ist unendlich, denn es gibt keinen Pfad, das Gewicht von [colorText value:0 /] zum [colorText value:1/] ist 3.
+Somit ist das Gewicht des bekannten  Weges (Stehenbleiben) kleiner als das des neuen Weges (über den [colorText value:0 /]).
+Nun wird der nächste [colorText value:3 /] angeschaut und wieder verglichen. Sind alle Endknoten verglichen, wird der Startknoten gewechselt.
+Sind für jeden Startknoten alle Endknoten verglichen, wird der Vergleichsknoten gewechselt. Alle Veränderungen (neue kürzeste Pfade) werden gespeichert.
+// Für alle Knoten mit dem Index k zwischen 1 und N (N ist die Anzahl der Knoten des Graphen) wird überprüft, ob der bisher bekannte Pfad zwischen Knotenpaaren verkürzt wird wenn er
+// über den Knoten k führt (und sich damit aus den 2 Teilpfaden von den Knoten zu k zusammensetzt) oder nicht.
+// Dabei wird die Matrix für jeden Knoten k von 1 bis N aufgerufen, die Veränderungen werden gespeichert und dann als Grundlage für die nächste Iteration verwendet.
 
 Unten siehst du das gleiche Netzerk, wie rechts. Um die Adjazensmatrix des Netzwerks zu sehen, drücke [action onClick:`if(visnum==0){visnum=1}else{visnum=0};`]hier[/action].
-[NetworkSteps i:i j:j k:k/]
+Unter dem Netzwerk ist der Pseudocode zu dem Algorithmus angezeigt. Er zeigt an, welcher Vergleich gerade gemacht wird.
+
 [Button onClick: `
     step--;
     k = Math.floor( (step-1)/((dim-1)*(dim-1)))%(dim)+1;
@@ -132,7 +143,7 @@ Unten siehst du das gleiche Netzerk, wie rechts. Um die Adjazensmatrix des Netzw
       i = Math.floor((step-1)/(dim-1))%(dim-1)+2;
     };
     `]
-<[/Button] [Button onClick: `
+<[/Button]       [Button onClick: `
     step++;
     k = Math.floor( (step+1)/((dim-1)*(dim-1)))%(dim)+1;
     j = (step+1)%(dim-1) +1;
@@ -148,8 +159,7 @@ Unten siehst du das gleiche Netzerk, wie rechts. Um die Adjazensmatrix des Netzw
     `]
 >[/Button]
 
-Der Pseudocode unten zeigt dir welcher Vergleich für jede Iteration gemacht wird.
-
+[NetworkSteps i:i j:j k:k/]
 [D3Pseudocode className:"d3-component" newPseudocode:newPseudocode state:state i:i k:k j:j/]
 
 

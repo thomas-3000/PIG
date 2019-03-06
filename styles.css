@@ -79,9 +79,25 @@ p {
   --color5: #000C43;
   --color6: rgb(227,74,51);
   --color7: #000000;
+  --color8: #FFD700;
+  --color8text: #a48b02;
+  --color9: #00cc44;
+  --color9text: #049936;
+  --color10: #ff5959;
+  --color10text: #c31e1e;
 }
 .pscrahmen {
   color: var(--color0);
+}
+.yellowText {
+  color: var(--color8text);
+  /* background-color: #acacac; */
+}
+.greenText {
+  color: var(--color9text);
+}
+.redText {
+  color: var(--color10text);
 }
 .horizontalHighlight {
   fill: #FFD700;
